@@ -105,6 +105,15 @@ module.exports = function(webpackEnv) {
           sourceMap: isEnvProduction && shouldUseSourceMap,
         },
       },
+      {
+        loader:require.resolve('less-loader'),
+        options:{
+          modules: false,
+          modifyVars: {
+            "@primary-color": "red"
+          }
+        }
+      },
     ].filter(Boolean);
     if (preProcessor) {
       loaders.push({

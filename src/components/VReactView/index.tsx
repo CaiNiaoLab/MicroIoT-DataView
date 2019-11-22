@@ -75,7 +75,7 @@ const VReactCommponets = styled.div `
 height:95vh;
 width:20vw;
 display:inline-block;
-background-color:gray;
+background-color:@v-react-primary;
 
 left:0;
 top:5vh;

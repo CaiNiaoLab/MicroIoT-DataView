@@ -11,8 +11,6 @@ import './store/index' // redux window._STORE
 
 /* 全局样式 */
 import 'antd/lib/notification/style/css'
-import 'antd/lib/input/style/css'
-import './common/style/index.less' // 自定义全局样式
 /* 业务组件唯一入口 */
 import { VReactView } from './components/index'
 import { Provider } from 'react-redux'
@@ -41,3 +39,5 @@ interface RootProps {
 interface RootState {
 
 }
+
+
