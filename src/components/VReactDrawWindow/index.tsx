@@ -27,4 +27,8 @@ height:95vh;
 width:60vw;
 display:inline-block;
 background-color:black;
+
+top:5vh;
+left:20vw;
+position: relative;
 `

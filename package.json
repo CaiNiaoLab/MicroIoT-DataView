@@ -24,7 +24,6 @@
     "less": "^3.10.1",
     "less-loader": "^5.0.0",
     "lodash": "^4.17.14",
-    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-beautiful-dnd": "^11.0.5",
     "react-color": "^2.17.3",

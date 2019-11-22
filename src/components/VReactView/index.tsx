@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 
 //import './css.less'
 import styled from 'styled-components'
-import { VReactDrawWindow } from '..';
+//import rbd from 'react-beautiful-dnd'
+
+import { VReactDrawWindow, VReactCommponet, VReactCommponetDetailArea } from '..';
 
 export interface IVReactViewProps {
 
@@ -21,11 +23,13 @@ class VReactView extends React.Component<IVReactViewProps> {
 
         </VReactHeader>
         <VReactCommponets>
-
+          <VReactCommponet />
+          <VReactCommponet />
+          <VReactCommponet />
         </VReactCommponets>
         <VReactDrawWindow />
         <VReactCommponetDetail>
-          
+           <VReactCommponetDetailArea />
         </VReactCommponetDetail>
         </VReactFrameWork>
     );
@@ -45,23 +49,35 @@ height:100vh;
 width:100vw;
 display:block;
 background-color:beige;
+
 `
 const VReactHeader = styled.div `
 height:5vh;
 width:100vw;
 display:block;
-background-color:yellowgreen;
+background-color:blueviolet;
+
+top:0;
+position: fixed;
 `
 
 const VReactCommponetDetail = styled.div `
 height:95vh;
 width:20vw;
 display:inline-block;
-background-color:palegreen;
+background-color:gray;
+
+right:0;
+top:5vh;
+position: fixed;
 `
 const VReactCommponets = styled.div `
 height:95vh;
 width:20vw;
 display:inline-block;
-background-color:palegreen;
+background-color:var(v-react-primary-color);
+
+left:0;
+top:5vh;
+position: fixed;
 `
