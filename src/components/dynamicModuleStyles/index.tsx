@@ -3,6 +3,7 @@ import { State, Props } from './interface';
 import Seletor from '../../publicComponents/selector';
 import { SketchPicker } from 'react-color';
 import { store } from '../../store';
+import {Input} from 'antd';
 const styles = require('./styles.css');
 export default class ModulesStyles extends React.Component<Props, State> {
     constructor(props: any) {
@@ -50,7 +51,10 @@ export default class ModulesStyles extends React.Component<Props, State> {
             <div className={styles.container}>
                 <h3>Modules Styles Setting:</h3>
                 <div onMouseEnter={() => this.highLight()}>parent</div>
-                <div>height</div>
+                <div>
+                    height
+                    <Input/>
+                </div>
                 <div>width</div>
                 <div>
                     <button onClick={() => this.colorPicker('bgc')}>bgc</button>

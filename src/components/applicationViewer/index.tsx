@@ -10,11 +10,29 @@ export default class ApplicationViewer extends React.Component<Props, State>{
         this.state = {
             isLoading: true,
             dragElemArray: [],
-            layoutArray: ['Traditional', 'Custom', 'Cross Division', 'Grid', 'Flex', 'test'],
+            layoutArray: ['Traditional', 'Custom', 'Cross Division', 'Grid', 'Flex'],
             prevItem: null,
-            currentLayout: "crossDivision"
+            currentLayout: "CrossDivision"
         }
     }
+    layoutArray:Array<{key:string;val:string}> = [
+        {
+            key:'Traditional',
+            val:'Traditional'
+        },{
+            key:'Custom',
+            val:'Custom'
+        },{
+            key:'CrossDivision',
+            val:'Cross Division'
+        },{
+            key:'Grid',
+            val:'Grid'
+        },{
+            key:'Flex',
+            val:'Flex'
+        }
+    ]
     renderDrag = (parent: any, index: number): JSX.Element => {
         console.log(parent)
         return (
@@ -35,13 +53,13 @@ export default class ApplicationViewer extends React.Component<Props, State>{
     }
     layoutItem = (item: any, index: number) => {
         return (
-            <div onClick={e => this.layoutItemClick(e, item)} className={styles.layoutItemContainer} key={index}>
-                {item}
+            <div onClick={e => this.layoutItemClick(e, item.key)} className={styles.layoutItemContainer} key={index}>
+                {item.val}
             </div>
         )
     }
     layoutPicker = () => {
-        let temp = this.state.layoutArray.concat();
+        let temp = this.layoutArray.concat();
         return temp.map(this.layoutItem)
     }
     componentDidMount() {
