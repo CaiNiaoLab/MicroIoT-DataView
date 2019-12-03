@@ -15,22 +15,22 @@ export default class ApplicationViewer extends React.Component<Props, State>{
             currentLayout: "CrossDivision"
         }
     }
-    layoutArray:Array<{key:string;val:string}> = [
+    layoutArray: Array<{ key: string; val: string }> = [
         {
-            key:'Traditional',
-            val:'Traditional'
-        },{
-            key:'Custom',
-            val:'Custom'
-        },{
-            key:'CrossDivision',
-            val:'Cross Division'
-        },{
-            key:'Grid',
-            val:'Grid'
-        },{
-            key:'Flex',
-            val:'Flex'
+            key: 'Traditional',
+            val: 'Traditional'
+        }, {
+            key: 'Custom',
+            val: 'Custom'
+        }, {
+            key: 'CrossDivision',
+            val: 'Cross Division'
+        }, {
+            key: 'Grid',
+            val: 'Grid'
+        }, {
+            key: 'Flex',
+            val: 'Flex'
         }
     ]
     renderDrag = (parent: any, index: number): JSX.Element => {

@@ -26,3 +26,4 @@ export default class DynamicModulesListItem extends React.Component <Props,State
         )
     }
 }
+//docker run -ti -p 15672:15672 -p 15675:15675 -p 15692:15692 -p 1885:1883 -p 8883:8883 -d 7bae1715f543
