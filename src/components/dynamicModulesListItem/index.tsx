@@ -1,28 +1,29 @@
 import React from 'react';
 import { State, Props } from './interface';
-const styles = require('./styles.css');
-export default class DynamicModulesListItem extends React.Component <Props,State>{
+// const styles = require('./styles.css');
+import { Container } from './styles';
+export default class DynamicModulesListItem extends React.Component<Props, State>{
     constructor(props: any) {
         super(props);
     }
-    componentWillMount(){
+    componentWillMount() {
         this.setState({
-            moduleName:'undfined',
-            moduleType:'undfined type'
+            moduleName: 'undfined',
+            moduleType: 'undfined type'
         })
     }
     render() {
         return (
-            <div className={styles.container}>
-                <div className={styles.modulesInfoArea}>
+            <Container>
+                <div className="modulesInfoArea">
                     <div>name:{this.state.moduleName}</div>
                     <div>type:{this.state.moduleType}</div>
                 </div>
-                <div className={styles.buttonGrop}>
+                <div className="buttonGrop">
                     <button>Delete</button>
                     <button>Edit</button>
                 </div>
-            </div>
+            </Container>
         )
     }
 }

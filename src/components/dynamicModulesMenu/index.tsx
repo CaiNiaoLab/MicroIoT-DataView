@@ -2,7 +2,8 @@ import React from 'react';
 import { State, Props } from './interface';
 import User from '../userInfo';
 import Item from '../dynamicModulesListItem';
-const styles = require('./styles.css');
+// const styles = require('./styles.css');
+import { Container } from './styles';
 export default class DynamicModlesMenu extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
@@ -14,13 +15,13 @@ export default class DynamicModlesMenu extends React.Component<Props, State> {
     }
     render() {
         return (
-            <div className={styles.container}>
+            <Container >
                 <User />
-                <div style={{borderBottom:'1px solid rgba(34,34,34,.25)'}}>
+                <div style={{ borderBottom: '1px solid rgba(34,34,34,.25)' }}>
                     <label>
                         Device Type Chose:
                     </label>
-                    <select className={styles.typeChose} onChange={e => this.setState({
+                    <select className="typeChose" onChange={e => this.setState({
                         deviceType: e.target.value
                     })}>
                         {this.state.deviceList.map((item, index) => {
@@ -32,9 +33,9 @@ export default class DynamicModlesMenu extends React.Component<Props, State> {
                 </div>
                 <div>
                     Dynamic Modules List :
-                    <Item prset={this.state.prset}/>
+                    <Item prset={this.state.prset} />
                 </div>
-            </div>
+            </Container>
         )
     }
 }

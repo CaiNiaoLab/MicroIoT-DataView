@@ -1,6 +1,6 @@
 import React from 'react';
 import { State, Props } from './interface';
-const styles = require('./styles.css');
+import { Container } from './styles';
 export default class ParameterTable extends React.Component<Props, State>{
     constructor(props: any) {
         super(props);
@@ -11,9 +11,9 @@ export default class ParameterTable extends React.Component<Props, State>{
     }
     render() {
         return (
-            <div className={styles.container}>
-                <div className={styles.parameterSet}>
-                    <div className={styles.buttonGroup}>
+            <Container>
+                <div className="parameterSet">
+                    <div className="buttonGroup">
                         <button>Simaple</button>
                         <button>Detail</button>
                     </div>
@@ -22,52 +22,28 @@ export default class ParameterTable extends React.Component<Props, State>{
                             Select or add a module to start parameter configuration
                         </h1>
                     }
-                    {/* <div className={styles.parameterItem}>
-                        <label>Height</label>
-                        <input placeholder="" />
-                    </div>
-                    <div className={styles.parameterItem}>
-                        <label>Width</label>
-                        <input placeholder="" />
-                    </div>
-                    <div className={styles.parameterItem}>
-                        <label>front Color</label>
-                        <input placeholder="" />
-                    </div>
-                    <div className={styles.parameterItem}>
-                        <label>Background Color</label>
-                        <input placeholder="" />
-                    </div>
-                    <div className={styles.parameterItem}>
-                        <label>front family</label>
-                        <input placeholder="" />
-                    </div>
-                    <div className={styles.parameterItem}>
-                        <label>Parent Element</label>
-                        <input placeholder="" />
-                    </div> */}
-                    <div className={styles.parameterItem}>
+                    <div className="parameterItem">
                         <label>Module Features</label>
                         <input placeholder="" />
                     </div>
-                    <div className={styles.parameterItem}>
+                    <div className="parameterItem">
                         <label>Module Parameter</label>
                         <input placeholder="" />
                     </div>
-                    <div className={styles.parameterItem}>
+                    <div className="parameterItem">
                         <label>Module Topic</label>
                         <input placeholder="" />
                     </div>
-                    <div className={styles.parameterItem}>
+                    <div className="parameterItem">
                         <label>Command Key</label>
                         <input placeholder="" />
                     </div>
-                    <div className={styles.parameterItem}>
+                    <div className="parameterItem">
                         <label>Command Value</label>
                         <input placeholder="" />
                     </div>
                 </div>
-            </div>
+            </Container>
         )
     }
 }

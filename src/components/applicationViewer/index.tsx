@@ -3,7 +3,8 @@ import { State, Props } from './interface';
 import Draggable from 'react-draggable';
 import LayoutEdit from '../layoutComponents/';
 import ModulesStyles from '../dynamicModuleStyles';
-const styles = require('./styles.css');
+import { Container } from './styles';
+
 export default class ApplicationViewer extends React.Component<Props, State>{
     constructor(props: any) {
         super(props);
@@ -36,7 +37,7 @@ export default class ApplicationViewer extends React.Component<Props, State>{
     renderDrag = (parent: any, index: number): JSX.Element => {
         console.log(parent)
         return (
-            <Draggable defaultClassName={styles.draggableItem} key={index} bounds={parent}>
+            <Draggable defaultClassName="draggableItem" key={index} bounds={parent}>
                 <div>test</div>
             </Draggable>
         )
@@ -53,7 +54,7 @@ export default class ApplicationViewer extends React.Component<Props, State>{
     }
     layoutItem = (item: any, index: number) => {
         return (
-            <div onClick={e => this.layoutItemClick(e, item.key)} className={styles.layoutItemContainer} key={index}>
+            <div onClick={e => this.layoutItemClick(e, item.key)} className="layoutItemContainer" key={index}>
                 {item.val}
             </div>
         )
@@ -73,11 +74,11 @@ export default class ApplicationViewer extends React.Component<Props, State>{
     }
     render() {
         return (
-            <div className={styles.container}>
-                <div className={styles.layoutPickerArea}>
+            <Container className="container">
+                <div className="layoutPickerArea">
                     <div style={{ width: "5%", textAlign: 'center' }}> {"<"} </div>
-                    <div className={styles.layoutPickerScrollContaienr}>
-                        <div className={styles.layoutPickerScroll} >
+                    <div className="layoutPickerScrollContaienr">
+                        <div className="layoutPickerScroll" >
                             {this.layoutPicker()}
                         </div>
                     </div>
@@ -88,15 +89,15 @@ export default class ApplicationViewer extends React.Component<Props, State>{
                         Application previewer is loading, please wait a second.
                     </h1>
                 }
-                <div className={styles.draggableMain}>
-                    <div className={styles.draggable}>
+                <div className="draggableMain">
+                    <div className="draggable">
                         <LayoutEdit layoutType={this.state.currentLayout} />
                     </div>
-                    <div className={styles.modulesInfo}>
+                    <div className="modulesInfo">
                         <ModulesStyles />
                     </div>
                 </div>
-            </div>
+            </Container>
         )
     }
 }

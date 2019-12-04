@@ -4,7 +4,8 @@ import Seletor from '../../publicComponents/selector';
 import { SketchPicker } from 'react-color';
 import { store } from '../../store';
 import {Input} from 'antd';
-const styles = require('./styles.css');
+import { Container } from './styles';
+
 export default class ModulesStyles extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
@@ -48,7 +49,7 @@ export default class ModulesStyles extends React.Component<Props, State> {
     }
     render() {
         return (
-            <div className={styles.container}>
+            <Container className="container">
                 <h3>Modules Styles Setting:</h3>
                 <div onMouseEnter={() => this.highLight()}>parent</div>
                 <div>
@@ -63,7 +64,7 @@ export default class ModulesStyles extends React.Component<Props, State> {
                 </div>
                 <div>bgi</div>
                 <div>
-                    <Seletor className={styles.selector} getValue={this.getValue} data={[{ key: "test", value: "test" }, { key: "test1", value: "test1" }]} />
+                    <Seletor className="selector" getValue={this.getValue} data={[{ key: "test", value: "test" }, { key: "test1", value: "test1" }]} />
                 </div>
                 <div>font-size</div>
                 <div>font-position</div>
@@ -75,7 +76,7 @@ export default class ModulesStyles extends React.Component<Props, State> {
                 <div>border</div>
                 <div>preset-position-for-parent</div>
                 <div>preset-position-for-fixed</div>
-            </div>
+            </Container>
         )
     }
 }
