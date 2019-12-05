@@ -77,6 +77,11 @@ export const Container = styled.div`
     height: 100vh;
     box-sizing: border-box;
     padding: 5px;
+    .buttonGroup{
+        width:100%;
+        height: 34px;
+        border-left: 1px solid rgba(34,34,34,.25);
+    }
     h1 {
        text-align: center;
     }
