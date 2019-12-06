@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button,ButtonGroup} from '@blueprintjs/core';
+// import {Button,ButtonGroup} from '@blueprintjs/core';
 import { State, Props } from './interface';
 import { Container } from './styles';
 export default class ParameterTable extends React.Component<Props, State>{
@@ -14,14 +14,10 @@ export default class ParameterTable extends React.Component<Props, State>{
         return (
             <Container>
                 <div className="parameterSet">
-                    <ButtonGroup minimal={true}>
-                        <Button icon="database">Simaple</Button>
-                        <Button>Detail</Button>
-                    </ButtonGroup>
-                    {/* <div className="buttonGroup">
+                    <div className="buttonGroup">
                         <button>Simaple</button>
                         <button>Detail</button>
-                    </div> */}
+                    </div>
                     {this.state.deviceID ? null :
                         <h1>
                             Select or add a module to start parameter configuration
