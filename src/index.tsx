@@ -1,43 +1,21 @@
-/* 调用模块 */
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { BrowserRouter, Route } from 'react-router-dom'
-import { register } from './registerServiceWorker'
-
-/* 全局挂载 */
-//import './common/js/adaption' // rem 自适应
-import './store/index' // redux window._STORE
-//import './api/config' // ajax window.API
-
-/* 全局样式 */
-import 'antd/lib/notification/style/css'
-/* 业务组件唯一入口 */
-import { VReactView } from './components/index'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+import App from './App';
 import { Provider } from 'react-redux'
-
-declare global { // 定义暴露全局的属性
-  interface Window {
-    API: any,
-    _STORE: any
-  }
-}
-/* 渲染 */
+import { store } from './store';
+import '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/core/lib/css/blueprint-hi-contrast.css';
+// import { Button, Intent, Spinner } from "@blueprintjs/core";
 ReactDOM.render(
-  <Provider store={window._STORE}>
-    <BrowserRouter>
-      <Route path="/" component={VReactView} />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('rootDiv') as HTMLElement
-);
-register(null)
+    <Provider store={store}>
+        <App />
+    </Provider>
+    ,
+    document.getElementById('root'));
 
-interface RootProps {
-
-}
-
-interface RootState {
-
-}
-
-
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
