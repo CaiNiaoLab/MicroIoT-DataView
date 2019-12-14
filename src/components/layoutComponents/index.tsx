@@ -1,6 +1,6 @@
 import React from 'react';
 import { State, Props } from './interface';
-// import ImportHOC from '../../highOrderComponents/importComponents';
+import ImportHOC from '../highOrderComponents/importComponents';
 import { Container } from './styles';
 export default class LayoutComponents extends React.Component<Props, State>{
     constructor(props: any) {
@@ -18,11 +18,10 @@ export default class LayoutComponents extends React.Component<Props, State>{
             })
         }
     }
-    
     layoutChosen = async () => {
         let flag = this.props.layoutType,
             CurrentLayout: React.ComponentClass;
-        CurrentLayout = (await import('./layoutChose/' + flag)).default
+        CurrentLayout = ImportHOC((await import('./layoutChose/' + flag)).default)
         this.setState({
             currentLayout: <CurrentLayout />
         })

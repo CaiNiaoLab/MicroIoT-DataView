@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Top = styled.div`
+export const Top = styled.div `
     height: 40%;
     width: 100%;
     position: relative;
@@ -10,7 +10,7 @@ export const Top = styled.div`
     align-items: center; 
 `;
 
-export const Bottom = styled.div`
+export const Bottom = styled.div `
 border-top: 1px solid #22222233; 
     height: 60%;
     width: 100%;
@@ -21,6 +21,6 @@ border-top: 1px solid #22222233;
         word-wrap: break-word;
         border: 1px solid #222;
         font-size: 14px;
-        padding: 0px;
+        padding: 5px;
     }
 `
