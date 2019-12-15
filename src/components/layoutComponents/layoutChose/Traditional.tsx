@@ -1,16 +1,12 @@
 import React from 'react';
 import { Props } from './interface/traditional';
-// import Draggable from 'react-draggable';
 import Dragger from '../../../publicComponents/Dragger';
 import { Container } from './styles/public';
 import { Top, Bottom } from './styles/traditional';
-import { connect } from 'react-redux';
-import { ChangeComponentBoundType, Components, stateType } from '../../../store/actions/actionType';
-import { changeComponentBound, addNewComponent } from '../../../store/actions/operation';
-
-// interface StateType extends ChangeComponentBoundType, Components { };
+import withLayout from '../../../highOrderComponents/withLayout'
 
 class Traditional extends React.Component<Props, any>{
+    
     handleCanvasPartClick = (canvasPart: string) => {
         const { changeComponentBound } = this.props;
         changeComponentBound(canvasPart);
@@ -53,16 +49,4 @@ class Traditional extends React.Component<Props, any>{
     }
 }
 
-const mapStateToProps: any = (state: stateType) => {
-    const canvasPart = state.componentStateManager.canvasPart;
-    console.log(state);
-
-    return {
-        canvasPart: canvasPart
-    }
-}
-const mapDispatchToProps = {
-    changeComponentBound,
-    addNewComponent
-}
-export default connect<any, any, Props>(mapStateToProps, mapDispatchToProps)(Traditional);
+export default withLayout(Traditional);

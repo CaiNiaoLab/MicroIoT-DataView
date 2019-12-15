@@ -1,7 +1,7 @@
 import React from 'react';
 import { State, Props } from './interface';
 import User from '../userInfo';
-import Item from '../dynamicModulesListItem';
+import MenuItem from '../dynamicModulesListItem';
 import { Container } from './styles';
 import { Button } from '@blueprintjs/core';
 import { connect } from 'react-redux';
@@ -16,6 +16,14 @@ class DynamicModlesMenu extends React.Component<mapTypesToUnecessary<Props>, Sta
         this.setState({
             deviceList: ['cc3200', 'esp8266', 'raspberry']
         })
+    }
+    renderMenuItem = ():JSX.Element[] | null =>{
+        const {components} = this.props;
+        return components?components.map((item:Components,index:number)=>{
+            return (
+                <MenuItem key={index} {...item}/>
+            )
+        }):null;
     }
     render() {
         return (
@@ -43,7 +51,7 @@ class DynamicModlesMenu extends React.Component<mapTypesToUnecessary<Props>, Sta
                         </p>
                         <Button>add</Button>
                     </div>
-                    {/* <Item prset={this.state.prset} /> */}
+                    {this.renderMenuItem()}
                 </div>
             </Container>
         )

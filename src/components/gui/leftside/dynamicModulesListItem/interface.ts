@@ -1,3 +1,5 @@
+import { Components } from "../../../../store/actions/actionType";
+
 export interface commandType {
     topic: string;
     key?: string;
@@ -9,9 +11,6 @@ export interface State {
     command: commandType;
 
 }
-export interface Props {
-    prset: commandType;
-    moduleName: string;
-    moduleID: number;
-    moduleType: string;
+export interface Props extends Components{
+    selectComponent(payload:string):{type:string,payload:string}
 }
