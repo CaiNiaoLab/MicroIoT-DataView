@@ -4,6 +4,7 @@ import { State, Props } from './interface';
 import { Button, ButtonGroup } from '@blueprintjs/core';
 import { Container } from './styles';
 import Input from '../../../../publicComponents/form';
+
 export default class DynamicModulesListItem extends React.Component<Props, State>{
     constructor(props: any) {
         super(props);
