@@ -2,7 +2,7 @@ import * as action from '../actions/actionType';
 import KeyForMap from '../../utils/useKeyForMap';
 import uuid from 'uuid';
 
-interface actionPayloadType extends action.ComponentsProperty, action.ChangeComponentBoundType { };
+interface actionPayloadType extends action.ComponentsProperty, action.ChangeComponentBoundType, action.ComponentsOption, action.ComponentsStyle { };
 
 interface actionsType {
     type: string;
@@ -30,7 +30,7 @@ const defaultState: defaultStateType = {
     canvasId: "",
     canvasHeigh: "",
     canvasWidth: "",
-    canvasPart: "top",
+    canvasPart: "bottom",
     components: {
         top: [],
         bottom: [{
@@ -47,6 +47,8 @@ const defaultState: defaultStateType = {
 }
 
 export const componentStateManager = (state = defaultState, actions: actionsType) => {
+    console.log(actions, state);
+
     switch (actions.type) {
         case action.INIT_STATE:
             return state;
@@ -60,6 +62,7 @@ export const componentStateManager = (state = defaultState, actions: actionsType
             const currentIndex: number = components.findIndex((item: action.Components) => item.isSelected);
             const currentComponent: action.Components | undefined = components.find((item: action.Components) => item.isSelected);
             if (currentComponent) {
+                currentComponent.property.option = actions.payload;
                 components[currentIndex] = currentComponent;
                 state.components[componentsIndex] = components;
             }

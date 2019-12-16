@@ -6,10 +6,10 @@ import { Top, Bottom } from './styles/traditional';
 import withLayout from '../../../highOrderComponents/withLayout'
 
 class Traditional extends React.Component<Props, any>{
-    
+
     handleCanvasPartClick = (canvasPart: string) => {
         const { changeComponentBound } = this.props;
-        changeComponentBound(canvasPart);
+        changeComponentBound({ canvasPart: canvasPart });
     }
     topBounds = {
         x: 0,

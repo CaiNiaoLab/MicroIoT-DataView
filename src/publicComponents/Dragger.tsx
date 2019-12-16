@@ -31,8 +31,6 @@ class Dragger extends React.Component<Props, any> {
   }
   handlerDragStop = (e: any) => {
     e.stopPropagation()
-    console.log(e);
-
   }
   render() {
     const { children } = this.props;

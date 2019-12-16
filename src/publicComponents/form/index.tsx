@@ -2,17 +2,19 @@ import React from 'react';
 import { Intent, ITagProps, InputGroup } from '@blueprintjs/core';
 import { IInputGroupExampleState } from './formItemInterface';
 import { mapTypesToUnecessary, stateType } from '../../store/actions/actionType';
+import { Control } from 'react-redux-form';
 import withFormItem from '../../highOrderComponents/withFormItem';
 import { connect } from 'react-redux';
 import { updateComponentOption, updateComponentStyle } from '../../store/actions/operation';
 
 interface InputType extends IInputGroupExampleState {
-  value: string | number;
-  handleFilterChange(): void;
-  absolutePath: string;
+  value: string;
+}
+interface RRFProps {
+  model: string; //
 }
 
-class Input extends React.Component<mapTypesToUnecessary<InputType>, IInputGroupExampleState> {
+class Input extends React.Component<InputType, IInputGroupExampleState> {
 
   public state: IInputGroupExampleState = {
     disabled: false,
@@ -23,32 +25,24 @@ class Input extends React.Component<mapTypesToUnecessary<InputType>, IInputGroup
     tagValue: "",
   };
 
-  updateValue = () => {
-    const { absolutePath } = this.props;
-    let tempPath: string[];
-    if (absolutePath) {
-      tempPath = absolutePath.split('.');
-    }
+  componentDidMount() {
+    console.log(this.props);
+
   }
 
   render() {
-    const { disabled, filterValue, large, small, showPassword, tagValue } = this.state;
+    // const { disabled, filterValue, large, small, showPassword, tagValue } = this.state;
+    const { value } = this.props;
     return (
       <InputGroup
-        disabled={disabled}
-        large={large}
         leftIcon="filter"
         placeholder="Filter histogram..."
-        small={small}
-        value={filterValue}></InputGroup>
+        value={value || ""}
+        type="text"
+      ></InputGroup>
     )
   }
 }
-
-
-const mapDispatchToProps = {
-  updateComponentOption,
-  updateComponentStyle,
-}
-
-export default connect(null, null)(Input);
+export default (props: RRFProps) => (
+  <Control.text defaultValue="" model={props.model} ignore={["focus", "change"]} component={Input} />
+)

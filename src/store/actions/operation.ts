@@ -16,7 +16,7 @@ import {
   UPDATE_COMPONENT_BY_FORN_ITEM
 } from './actionType';
 
-export const changeComponentBound = (payload: ChangeComponentBoundType = { canvasPart: 'top', canvasType: 'Traditional' }): ChangeComponentBoundReturn => {
+export const changeComponentBound = (payload: ChangeComponentBoundType = { canvasPart: 'bottom', canvasType: 'Traditional' }): ChangeComponentBoundReturn => {
   return {
     type: CHANGE_COMPONENT_BOUND,
     payload: payload

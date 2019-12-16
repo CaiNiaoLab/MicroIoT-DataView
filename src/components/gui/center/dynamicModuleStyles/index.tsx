@@ -5,6 +5,8 @@ import { SketchPicker } from 'react-color';
 import { store } from '../../../../store';
 import { InputGroup } from '@blueprintjs/core';
 import { Container } from './styles';
+import { Control, Form } from 'react-redux-form';
+import Input from '../../../../publicComponents/form';
 
 export default class ModulesStyles extends React.Component<Props, State> {
     constructor(props: any) {
@@ -47,49 +49,53 @@ export default class ModulesStyles extends React.Component<Props, State> {
         return (
             <Container className="container">
                 <h3>Modules Styles Setting:</h3>
-                <div className="baseClass">
-                    <InputGroup placeholder="width" />
-                    <InputGroup placeholder="width" />
-                </div>
-                <div className="baseClass">
-                    position
+                <Form model="forms">
+                    <div className="baseClass">
+                        <InputGroup placeholder="width" />
+                        {/* <InputGroup placeholder="width" /> */}
+                        <Input model=".components.bottom[0].property.style.height" />
+                    </div>
+                    <div className="baseClass">
+                        position
                     <InputGroup />
+                        <InputGroup />
+                    </div>
+                    <div>
+                        <button onClick={() => this.colorPicker('bgc')}>bgc</button>
+                        {this.state.bgcPicker ? <div style={{ position: 'relative', zIndex: 1000 }}> <SketchPicker onChange={(color: any) => { this.getColorChange('bgc', color) }} /></div> : null}
+                    </div>
+                    <div>bgi
                     <InputGroup />
-                </div>
-                <div>
-                    <button onClick={() => this.colorPicker('bgc')}>bgc</button>
-                    {this.state.bgcPicker ? <div style={{ position: 'relative', zIndex: 1000 }}> <SketchPicker onChange={(color: any) => { this.getColorChange('bgc', color) }} /></div> : null}
-                </div>
-                <div>bgi
+                    </div>
+                    <div className="baseClass">
+                        <Seletor className="selector" getValue={this.getValue} data={[{ key: "test", value: "test" }, { key: "test1", value: "test1" }]} />
+                    </div>
+                    <div className="baseClass">font-size
                     <InputGroup />
-                </div>
-                <div className="baseClass">
-                    <Seletor className="selector" getValue={this.getValue} data={[{ key: "test", value: "test" }, { key: "test1", value: "test1" }]} />
-                </div>
-                <div className="baseClass">font-size
+                    </div>
+                    <div className="baseClass">
+                        font-position
                     <InputGroup />
-                </div>
-                <div className="baseClass">
-                    font-position
-                    <InputGroup />
-                </div>
-                <div>
-                    <button onClick={() => this.colorPicker('font-color')}>font-color</button>
-                    {this.state.fontColorPicker ? <div style={{ position: 'relative', zIndex: 1000 }}> <SketchPicker /></div> : null}
-                </div>
-                <div className="baseClass">border-radius
+                    </div>
+                    <div>
+                        <button onClick={() => this.colorPicker('font-color')}>font-color</button>
+                        {this.state.fontColorPicker ? <div style={{ position: 'relative', zIndex: 1000 }}> <SketchPicker /></div> : null}
+                    </div>
+                    <div className="baseClass">border-radius
                     <InputGroup />
 
-                </div>
-                <div className="baseClass">border
+                    </div>
+                    <div className="baseClass">border
                     <InputGroup />
-                </div>
-                <div> className="baseClass"preset-position-for-parent
+                    </div>
+                    <div> className="baseClass"preset-position-for-parent
                     <InputGroup />
-                </div>
-                <div className="baseClass">preset-position-for-fixed
+                    </div>
+                    <div className="baseClass">preset-position-for-fixed
                     <InputGroup />
-                </div>
+                    </div>
+
+                </Form>
             </Container>
         )
     }
