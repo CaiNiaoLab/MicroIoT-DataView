@@ -1,9 +1,18 @@
 import React from 'react';
 import { Intent, ITagProps, InputGroup } from '@blueprintjs/core';
 import { IInputGroupExampleState } from './formItemInterface';
+import { mapTypesToUnecessary, stateType } from '../../store/actions/actionType';
 import withFormItem from '../../highOrderComponents/withFormItem';
+import { connect } from 'react-redux';
+import { updateComponentOption, updateComponentStyle } from '../../store/actions/operation';
 
-class Input extends React.Component<any, IInputGroupExampleState> {
+interface InputType extends IInputGroupExampleState {
+  value: string | number;
+  handleFilterChange(): void;
+  absolutePath: string;
+}
+
+class Input extends React.Component<mapTypesToUnecessary<InputType>, IInputGroupExampleState> {
 
   public state: IInputGroupExampleState = {
     disabled: false,
@@ -14,20 +23,32 @@ class Input extends React.Component<any, IInputGroupExampleState> {
     tagValue: "",
   };
 
+  updateValue = () => {
+    const { absolutePath } = this.props;
+    let tempPath: string[];
+    if (absolutePath) {
+      tempPath = absolutePath.split('.');
+    }
+  }
+
   render() {
     const { disabled, filterValue, large, small, showPassword, tagValue } = this.state;
-    const { handleFilterChange } = this.props;
     return (
-      <InputGroup disabled={disabled}
+      <InputGroup
+        disabled={disabled}
         large={large}
         leftIcon="filter"
-        onChange={handleFilterChange}
         placeholder="Filter histogram..."
-
         small={small}
         value={filterValue}></InputGroup>
     )
   }
 }
 
-export default withFormItem(Input);
+
+const mapDispatchToProps = {
+  updateComponentOption,
+  updateComponentStyle,
+}
+
+export default connect(null, null)(Input);

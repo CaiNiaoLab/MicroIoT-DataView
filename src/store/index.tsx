@@ -1,6 +1,7 @@
 import reducer from './reducers';
 import { createStore } from 'redux';
-export const store: any = createStore(reducer);
+import { devToolsEnhancer } from 'redux-devtools-extension';
+export const store: any = createStore(reducer, devToolsEnhancer({}));
 export interface StoreState {
     languageName: string,
     enthusiasmLevel: number

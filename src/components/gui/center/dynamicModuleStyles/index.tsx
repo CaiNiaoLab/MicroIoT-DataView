@@ -48,10 +48,8 @@ export default class ModulesStyles extends React.Component<Props, State> {
             <Container className="container">
                 <h3>Modules Styles Setting:</h3>
                 <div className="baseClass">
-                    size
-                    {/* <Input/> */}
-                    <InputGroup />
-                    <InputGroup />
+                    <InputGroup placeholder="width" />
+                    <InputGroup placeholder="width" />
                 </div>
                 <div className="baseClass">
                     position
@@ -64,18 +62,16 @@ export default class ModulesStyles extends React.Component<Props, State> {
                 </div>
                 <div>bgi
                     <InputGroup />
-
                 </div>
                 <div className="baseClass">
                     <Seletor className="selector" getValue={this.getValue} data={[{ key: "test", value: "test" }, { key: "test1", value: "test1" }]} />
                 </div>
                 <div className="baseClass">font-size
                     <InputGroup />
-
                 </div>
-                <div className="baseClass">font-position
+                <div className="baseClass">
+                    font-position
                     <InputGroup />
-
                 </div>
                 <div>
                     <button onClick={() => this.colorPicker('font-color')}>font-color</button>
@@ -87,15 +83,12 @@ export default class ModulesStyles extends React.Component<Props, State> {
                 </div>
                 <div className="baseClass">border
                     <InputGroup />
-
                 </div>
                 <div> className="baseClass"preset-position-for-parent
                     <InputGroup />
-
                 </div>
                 <div className="baseClass">preset-position-for-fixed
                     <InputGroup />
-
                 </div>
             </Container>
         )

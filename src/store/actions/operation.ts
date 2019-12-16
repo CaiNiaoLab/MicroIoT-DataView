@@ -12,7 +12,8 @@ import {
   ADD_NEW_COMPONENT,
   AddNewComponentReturn,
   SELECT_COMPONENT,
-  UPDATE_COMPONEN
+  UPDATE_COMPONEN,
+  UPDATE_COMPONENT_BY_FORN_ITEM
 } from './actionType';
 
 export const changeComponentBound = (payload: ChangeComponentBoundType = { canvasPart: 'top', canvasType: 'Traditional' }): ChangeComponentBoundReturn => {
@@ -41,9 +42,15 @@ export const updateComponentStyle = (payload: ComponentsStyle): UpdateComponentS
     payload: payload
   }
 }
-export const updateComponent = (payload: Components): {type:string,payload:Components} => {
+export const updateComponent = (payload: Components): { type: string, payload: Components } => {
   return {
     type: UPDATE_COMPONEN,
+    payload: payload
+  }
+}
+export const updateComponentByFormItem = (payload: any) => {
+  return {
+    type: UPDATE_COMPONENT_BY_FORN_ITEM,
     payload: payload
   }
 }
