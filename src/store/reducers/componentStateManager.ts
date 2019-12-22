@@ -1,6 +1,7 @@
 import * as action from '../actions/actionType';
 import KeyForMap from '../../utils/useKeyForMap';
 import uuid from 'uuid';
+import { fromJS,Map } from 'immutable';
 
 interface actionPayloadType extends action.ComponentsProperty, action.ChangeComponentBoundType, action.ComponentsOption, action.ComponentsStyle { };
 
@@ -46,26 +47,28 @@ const defaultState: defaultStateType = {
     }
 }
 
-export const componentStateManager = (state = defaultState, actions: actionsType) => {
-    console.log(actions, state);
-
+export const componentStateManager = (state:Map<string,any> = fromJS(defaultState), actions: actionsType) => {
     switch (actions.type) {
         case action.INIT_STATE:
             return state;
         case action.CHANGE_COMPONENT_BOUND:
-            state.canvasPart = actions.payload.canvasPart;
+            // state.canvasPart = actions.payload.canvasPart;
+            state = state.set("canvasPart",actions.payload);
             return state;
         case action.UPDATE_COMPONENT_OPTION:
-            const componentsSet = KeyForMap(state.components);
-            const componentsIndex = state.canvasPart === "top" ? componentsSet[0] : componentsSet[1];
-            const components = state.components[componentsIndex];
-            const currentIndex: number = components.findIndex((item: action.Components) => item.isSelected);
-            const currentComponent: action.Components | undefined = components.find((item: action.Components) => item.isSelected);
-            if (currentComponent) {
-                currentComponent.property.option = actions.payload;
-                components[currentIndex] = currentComponent;
-                state.components[componentsIndex] = components;
-            }
+            // const componentsSet = KeyForMap(state.components);
+            const componentsIndex = state.get("canvasPart");
+            const components = state.getIn(["components",componentsIndex]);
+            const currentIndex = components.findIndex((item: any) => item.get("isSelected"));
+            const currentComponent = components.findIndex((item: any) => item.get("isSelected"));
+            // if (currentComponent) {
+            //     currentComponent.property.option = actions.payload;
+            //     components[currentIndex] = currentComponent;
+            //     state.components[componentsIndex] = components;
+            // }
+            state = state.setIn(["components",currentIndex,currentComponent,"property","option"],fromJS(actions.payload));
+            console.log(state.toJS());
+            
             return state
         default:
             return state

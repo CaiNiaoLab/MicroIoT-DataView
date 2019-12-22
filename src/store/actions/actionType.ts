@@ -16,6 +16,9 @@ export const UPDATE_COMPONENT_BY_FORN_ITEM = 'UPDATE_COMPONENT_BY_FORN_ITEM';
 export type mapTypesToInterface<T> = {
   [K in keyof T]: T[K];
 }
+export type mapTypesToMap <T> ={
+  
+}
 export type mapTypesToUnecessary<T> = {
   [K in keyof T]?: T[K];
 }

@@ -5,8 +5,9 @@ import MenuItem from '../dynamicModulesListItem';
 import { Container } from './styles';
 import { Button } from '@blueprintjs/core';
 import { connect } from 'react-redux';
-import { stateType, Components,mapTypesToUnecessary } from '../../../../store/actions/actionType';
+import {  Components,mapTypesToUnecessary } from '../../../../store/actions/actionType';
 import { selectComponent } from '../../../../store/actions/operation';
+import {Map,List,merge} from 'immutable';
 
 class DynamicModlesMenu extends React.Component<mapTypesToUnecessary<Props>, State> {
     constructor(props: any) {
@@ -17,13 +18,11 @@ class DynamicModlesMenu extends React.Component<mapTypesToUnecessary<Props>, Sta
             deviceList: ['cc3200', 'esp8266', 'raspberry']
         })
     }
-    renderMenuItem = ():JSX.Element[] | null =>{
+    renderMenuItem = () =>{
         const {components} = this.props;
-        return components?components.map((item:Components,index:number)=>{
-            return (
-                <MenuItem key={index} {...item}/>
-            )
-        }):null;
+        return components?.map((item:any,index:number)=>{
+            return <MenuItem key={index} componentId={item.get("componentId")}/>
+        })
     }
     render() {
         return (
@@ -58,8 +57,11 @@ class DynamicModlesMenu extends React.Component<mapTypesToUnecessary<Props>, Sta
     }
 }
 
-const mapStateToProps:any = (state:stateType) =>{
-    const components:Array<Components> = Object.assign([],state.componentStateManager.components.top,state.componentStateManager.components.bottom);
+const mapStateToProps:any = (state:Map<string,any>) =>{
+    console.log(state);
+    
+    // const components:Array<Components> = Object.assign([],state.componentStateManager.components.top,state.componentStateManager.components.bottom);
+    const components:List<Components> = merge(state.getIn(["componentStateManager","components","top"]),state.getIn(["componentStateManager","components","bottom"]))
     return {
         components:components
     }

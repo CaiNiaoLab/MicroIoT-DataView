@@ -1,7 +1,7 @@
-import { ChangeStyles } from './dynamicModulesStyles';
+// import { ChangeStyles } from './dynamicModulesStyles';
 import { componentStateManager } from './componentStateManager';
-import { combineReducers, Reducer } from 'redux';
-import { combineForms, createForms } from 'react-redux-form';
+import {  Reducer,combineReducers } from 'redux';
+import { createForms } from 'react-redux-form';
 
 const reducers = combineReducers({
   // ChangeStyles: ChangeStyles,
