@@ -26,23 +26,30 @@ class Input extends React.Component<InputType, IInputGroupExampleState> {
   };
 
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
 
   }
 
   render() {
     // const { disabled, filterValue, large, small, showPassword, tagValue } = this.state;
+    console.log(this.props);
     const { value } = this.props;
     return (
       <InputGroup
         leftIcon="filter"
         placeholder="Filter histogram..."
-        value={value || ""}
-        type="text"
+        {...this.props}
       ></InputGroup>
     )
   }
 }
-export default (props: RRFProps) => (
-  <Control.text defaultValue="" model={props.model} ignore={["focus", "change"]} component={Input} />
-)
+export default (props: RRFProps) =>{ 
+  console.log(props);
+  return(
+    <Control.text 
+    defaultValue="" 
+    model={props.model} 
+    ignore={["focus"]} 
+    component={Input} />
+  )
+}

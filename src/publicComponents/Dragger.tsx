@@ -47,16 +47,8 @@ class Dragger extends React.Component<Props, any> {
   }
 }
 
-const mapStateToProps: any = (state: stateType, ownProps: any) => {
-  const canvasPart = state.componentStateManager.canvasPart;;
-  let components: any = state.componentStateManager.components;
-
-  console.log(state);
-  if (canvasPart === 'top') {
-    components = state.componentStateManager.components.top;
-  } else if (canvasPart === 'bottom') {
-    components = state.componentStateManager.components.bottom;
-  }
+const mapStateToProps: any = (state: any, ownProps: any) => {
+  let components: any = state.componentStateManager.get("components");
   let selectComponent = {};
   try {
     selectComponent = components.find((item: any) => item.isSelected);

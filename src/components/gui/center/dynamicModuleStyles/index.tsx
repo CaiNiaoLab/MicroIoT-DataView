@@ -49,16 +49,19 @@ export default class ModulesStyles extends React.Component<Props, State> {
         return (
             <Container className="container">
                 <h3>Modules Styles Setting:</h3>
-                <Form model="forms">
+                <Form model="componentStateManager">
                     <div className="baseClass">
                         <InputGroup placeholder="width" />
                         {/* <InputGroup placeholder="width" /> */}
-                        <Input model=".components.bottom[0].property.style.height" />
+                        <Input model=".components[0].property.style.height" />
                     </div>
                     <div className="baseClass">
                         position
-                    <InputGroup />
-                        <InputGroup />
+                    {/* <InputGroup />
+                        <InputGroup /> */}
+                        <Input model="componentStateManager.components[0].property.option.x" />
+                        <Input model="componentStateManager.components[0].property.option.y" />
+
                     </div>
                     <div>
                         <button onClick={() => this.colorPicker('bgc')}>bgc</button>

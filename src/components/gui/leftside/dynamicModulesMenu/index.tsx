@@ -5,14 +5,11 @@ import MenuItem from '../dynamicModulesListItem';
 import { Container } from './styles';
 import { Button } from '@blueprintjs/core';
 import { connect } from 'react-redux';
-import {  Components,mapTypesToUnecessary, stateType } from '../../../../store/actions/actionType';
+import {  Components,mapTypesToUnecessary } from '../../../../store/actions/actionType';
 import { selectComponent } from '../../../../store/actions/operation';
-import {Map,List,merge} from 'immutable';
+import {Map,List} from 'immutable';
 
 class DynamicModlesMenu extends React.Component<mapTypesToUnecessary<Props>, State> {
-    constructor(props: any) {
-        super(props);
-    }
     componentWillMount() {
         this.setState({
             deviceList: ['cc3200', 'esp8266', 'raspberry']
@@ -57,11 +54,12 @@ class DynamicModlesMenu extends React.Component<mapTypesToUnecessary<Props>, Sta
     }
 }
 
-const mapStateToProps:any = (state:stateType) =>{
-    console.log(state);
-    
+const mapStateToProps:any = (state:any) =>{
+
+    const manager = state.componentStateManager;
+
     // const components:Array<Components> = Object.assign([],state.componentStateManager.components.top,state.componentStateManager.components.bottom);
-    const components:List<Components> = merge(state.componentStateManager.getIn(["componentStateManager","components","top"]),state.getIn(["componentStateManager","components","bottom"]))
+    const components:List<Components> = manager.getIn(["componentStateManager","components"]);
     return {
         components:components
     }
