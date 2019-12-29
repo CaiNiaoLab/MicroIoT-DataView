@@ -5,7 +5,7 @@ import MenuItem from '../dynamicModulesListItem';
 import { Container } from './styles';
 import { Button } from '@blueprintjs/core';
 import { connect } from 'react-redux';
-import {  Components,mapTypesToUnecessary } from '../../../../store/actions/actionType';
+import {  Components,mapTypesToUnecessary, stateType } from '../../../../store/actions/actionType';
 import { selectComponent } from '../../../../store/actions/operation';
 import {Map,List} from 'immutable';
 
@@ -17,8 +17,8 @@ class DynamicModlesMenu extends React.Component<mapTypesToUnecessary<Props>, Sta
     }
     renderMenuItem = () =>{
         const {components} = this.props;
-        return components?.map((item:any,index:number)=>{
-            return <MenuItem key={index} componentId={item.get("componentId")}/>
+        return components?.map((item:Components,index:number)=>{
+            return <MenuItem key={index} componentId={item.componentId}/>
         })
     }
     render() {
@@ -54,12 +54,10 @@ class DynamicModlesMenu extends React.Component<mapTypesToUnecessary<Props>, Sta
     }
 }
 
-const mapStateToProps:any = (state:any) =>{
-
-    const manager = state.componentStateManager;
-
-    // const components:Array<Components> = Object.assign([],state.componentStateManager.components.top,state.componentStateManager.components.bottom);
-    const components:List<Components> = manager.getIn(["componentStateManager","components"]);
+const mapStateToProps:any = (state:stateType) =>{
+    console.log(state );
+    const components = state.componentStateManager.components;
+    // const components = manager.getIn(["components"]);
     return {
         components:components
     }

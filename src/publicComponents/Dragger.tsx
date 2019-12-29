@@ -3,25 +3,22 @@ import { connect } from 'react-redux';
 import Draggable, { DraggableEvent } from 'react-draggable';
 import { defaultStateType } from '../store/reducers/componentStateManager';
 import { updateComponentOption } from '../store/actions/operation';
-import { stateType, UpdateComponentOptionReturn } from '../store/actions/actionType';
+import { stateType, UpdateComponentOptionReturn, Components, mapTypesToUnecessary } from '../store/actions/actionType';
 import { any } from 'prop-types';
 
 interface Props {
   children: React.ReactNode;
-  bounds: {
-    x: number;
-    y: number;
-  };
+  selectComponent:Components
   updateComponentOption?(payload: {
     x: number;
     y: number;
   }): UpdateComponentOptionReturn;
 }
 
-class Dragger extends React.Component<Props, any> {
+class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
 
   handlerDrag = (e: DraggableEvent, data: any) => {
-    const { bounds, updateComponentOption } = this.props;
+    const {  updateComponentOption } = this.props;
     if (updateComponentOption) {
       updateComponentOption({
         x: data.x,
@@ -33,7 +30,7 @@ class Dragger extends React.Component<Props, any> {
     e.stopPropagation()
   }
   render() {
-    const { children } = this.props;
+    const { children ,selectComponent} = this.props;
     return (
       <Draggable
         bounds="parent"
@@ -41,17 +38,17 @@ class Dragger extends React.Component<Props, any> {
         onDrag={this.handlerDrag}
         onStop={this.handlerDragStop}
       >
-        <div onClick={(e: any) => { e.stopPropagation() }}>{children}</div>
+        <div style={selectComponent?.property.style} onClick={(e: any) => { e.stopPropagation() }}>{children}</div>
       </Draggable>
     )
   }
 }
 
-const mapStateToProps: any = (state: any, ownProps: any) => {
-  let components: any = state.componentStateManager.get("components");
-  let selectComponent = {};
+const mapStateToProps: any = (state: stateType, ownProps: any) => {
+  let components: any = state.componentStateManager.components;
+  let selectComponent:Components | undefined ;
   try {
-    selectComponent = components.find((item: any) => item.isSelected);
+    selectComponent= components.find((item: any) => item.isSelected);
   } catch (error) {
     console.log(error);
   }
@@ -62,6 +59,6 @@ const mapStateToProps: any = (state: any, ownProps: any) => {
 const mapDispatchToProps = {
   updateComponentOption
 }
-export default connect<any, any, Props>(mapStateToProps, mapDispatchToProps)(Dragger);
+export default connect<any, any, mapTypesToUnecessary<Props>>(mapStateToProps, mapDispatchToProps)(Dragger);
 
 

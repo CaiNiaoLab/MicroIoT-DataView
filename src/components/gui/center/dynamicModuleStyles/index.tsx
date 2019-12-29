@@ -53,14 +53,13 @@ export default class ModulesStyles extends React.Component<Props, State> {
                     <div className="baseClass">
                         <InputGroup placeholder="width" />
                         {/* <InputGroup placeholder="width" /> */}
-                        <Input model=".components[0].property.style.height" />
+                        <Input label="尺寸" model=".components[0].property.style.height" />
                     </div>
                     <div className="baseClass">
-                        position
                     {/* <InputGroup />
                         <InputGroup /> */}
-                        <Input model="componentStateManager.components[0].property.option.x" />
-                        <Input model="componentStateManager.components[0].property.option.y" />
+                        <Input label="位置" model="componentStateManager.components[0].property.option.x" />
+                        <Input label="位置" model="componentStateManager.components[0].property.option.y" />
 
                     </div>
                     <div>

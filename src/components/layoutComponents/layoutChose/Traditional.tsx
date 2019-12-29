@@ -40,7 +40,7 @@ class Traditional extends React.Component<Props, any>{
                     <h1>System Score</h1>
                 </Top>
                 <Bottom ref={this.bottomRef} onClick={() => this.handleCanvasPartClick('bottom')}>
-                    <Dragger bounds={this.bottomBounds}>
+                    <Dragger>
                         <div>Traditional</div>
                     </Dragger>
                 </Bottom>
