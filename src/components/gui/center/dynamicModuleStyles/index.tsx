@@ -6,7 +6,8 @@ import { store } from '../../../../store';
 import { InputGroup } from '@blueprintjs/core';
 import { Container } from './styles';
 import { Control, Form } from 'react-redux-form';
-import Input from '../../../../publicComponents/form';
+import Input,{InputNumber, MutliInputNumber} from '../../../../publicComponents/form';
+import FormItem from "../../../../publicComponents/form/FormItem"
 
 export default class ModulesStyles extends React.Component<Props, State> {
     constructor(props: any) {
@@ -51,15 +52,16 @@ export default class ModulesStyles extends React.Component<Props, State> {
                 <h3>Modules Styles Setting:</h3>
                 <Form model="componentStateManager">
                     <div className="baseClass">
-                        <InputGroup placeholder="width" />
                         {/* <InputGroup placeholder="width" /> */}
-                        <Input label="尺寸" model=".components[0].property.style.height" />
+                        <FormItem labels="尺寸" content={<MutliInputNumber models={["componentStateManager.components[0].style.height","componentStateManager.components[0].property.style.width"]} />}/>
+                        {/* <Input label="尺寸" model=".components[0].property.style.height" /> */}
                     </div>
                     <div className="baseClass">
                     {/* <InputGroup />
                         <InputGroup /> */}
-                        <Input label="位置" model="componentStateManager.components[0].property.option.x" />
-                        <Input label="位置" model="componentStateManager.components[0].property.option.y" />
+                        <FormItem labels="位置" content={<MutliInputNumber models={["componentStateManager.components[0].property.option.x","componentStateManager.components[0].property.option.y"]} />}/>
+                        {/* <Input label="位置" model="componentStateManager.components[0].property.option.x" /> */}
+                        {/* <Input label="位置" model="componentStateManager.components[0].property.option.y" /> */}
 
                     </div>
                     <div>

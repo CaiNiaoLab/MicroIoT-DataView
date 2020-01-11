@@ -1,20 +1,9 @@
 import React from 'react';
 import { NumericInput, InputGroup } from '@blueprintjs/core';
-import { IInputGroupExampleState } from './formItemInterface';
+import { IInputGroupExampleState, InputType, RRFProps, multiRRFProps } from './formItemInterface';
 import { Control } from 'react-redux-form';
 
-interface InputType extends IInputGroupExampleState {
-  value: string;
-}
-interface RRFProps {
-  model: string; //
-  label: string;
-}
 
-interface multiRRFProps {
-  models:string[]
-  labels: string[];
-}
 class Input extends React.Component<InputType, IInputGroupExampleState> {
 
   public state: IInputGroupExampleState = {
@@ -32,7 +21,6 @@ class Input extends React.Component<InputType, IInputGroupExampleState> {
   }
 
   render() {
-    // const { disabled, filterValue, large, small, showPassword, tagValue } = this.state;
     return (
       <InputGroup
         leftIcon="filter"
@@ -66,5 +54,15 @@ export const InputNumber = (props:RRFProps) =>{
 }
 
 export const MutliInputNumber = (props:multiRRFProps) =>{
-
+  const { models } = props;
+  return <>{models.map((item:string,index:number)=>{
+    return <Control.text 
+    defaultValue="" 
+    updateOn="blur"
+    model={item}
+    key={index} 
+    ignore={["focus"]} 
+    component={NumericInput} />
+  })}</>
 }
+

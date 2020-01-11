@@ -3,5 +3,5 @@ export interface State {
     currentLayout: string | JSX.Element;
 }
 export interface Props {
-    layoutType: string;
+    canvasType: string;
 }
