@@ -1,3 +1,7 @@
+/** @format */
+
+import { ReactNode } from "react";
+
 export interface IInputGroupExampleState {
   disabled: boolean;
   filterValue: string;
@@ -14,10 +18,10 @@ export interface RRFProps {
 }
 
 export interface multiRRFProps {
-  models:string[]
+  models: string[];
 }
 
 export interface FormItemProps {
-  labels: string;
-  content:JSX.Element;
+  labels: string | ReactNode;
+  children?: ReactNode;
 }

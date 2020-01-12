@@ -1,14 +1,24 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Draggable, { DraggableEvent } from 'react-draggable';
-import { defaultStateType } from '../store/reducers/componentStateManager';
-import { updateComponentOption } from '../store/actions/operation';
-import { stateType, UpdateComponentOptionReturn, Components, mapTypesToUnecessary } from '../store/actions/actionType';
-import { any } from 'prop-types';
+/** @format */
 
-interface Props {
+import React from "react";
+import { connect } from "react-redux";
+import Draggable, { DraggableEvent } from "react-draggable";
+import { defaultStateType } from "../store/reducers/componentStateManager";
+import { updateComponentOption } from "../store/actions/operation";
+import {
+  stateType,
+  UpdateComponentOptionReturn,
+  Components,
+  mapTypesToUnecessary,
+} from "../store/actions/actionType";
+
+interface ownProps {
   children: React.ReactNode;
-  selectComponent:Components
+  componentId: string;
+}
+
+interface Props extends ownProps {
+  selectComponent: Components;
   updateComponentOption?(payload: {
     x: number;
     y: number;
@@ -16,21 +26,20 @@ interface Props {
 }
 
 class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
-
   handlerDrag = (e: DraggableEvent, data: any) => {
-    const {  updateComponentOption } = this.props;
+    const { updateComponentOption } = this.props;
     if (updateComponentOption) {
       updateComponentOption({
         x: data.x,
-        y: data.y
+        y: data.y,
       });
     }
-  }
+  };
   handlerDragStop = (e: any) => {
-    e.stopPropagation()
-  }
+    e.stopPropagation();
+  };
   render() {
-    const { children ,selectComponent} = this.props;
+    const { children, selectComponent } = this.props;
     return (
       <Draggable
         bounds="parent"
@@ -38,27 +47,36 @@ class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
         onDrag={this.handlerDrag}
         onStop={this.handlerDragStop}
       >
-        <div style={selectComponent?.property.style} onClick={(e: any) => { e.stopPropagation() }}>{children}</div>
+        <div
+          style={selectComponent?.property.style}
+          onClick={(e: any) => {
+            e.stopPropagation();
+          }}
+        >
+          {children}
+        </div>
       </Draggable>
-    )
+    );
   }
 }
 
-const mapStateToProps: any = (state: stateType, ownProps: any) => {
-  let components: any = state.componentStateManager.components;
-  let selectComponent:Components | undefined ;
+const mapStateToProps: any = (state: stateType, ownProps: ownProps) => {
+  const { components } = state.componentStateManager;
+  const { componentId } = ownProps;
+  let selectComponent = null;
   try {
-    selectComponent= components.find((item: any) => item.isSelected);
+    selectComponent = components[componentId];
   } catch (error) {
     console.log(error);
   }
   return {
-    selectComponent: selectComponent
-  }
-}
+    selectComponent: selectComponent,
+  };
+};
 const mapDispatchToProps = {
-  updateComponentOption
-}
-export default connect<any, any, mapTypesToUnecessary<Props>>(mapStateToProps, mapDispatchToProps)(Dragger);
-
-
+  updateComponentOption,
+};
+export default connect<any, any, mapTypesToUnecessary<Props>>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Dragger);

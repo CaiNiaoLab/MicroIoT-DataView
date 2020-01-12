@@ -1,13 +1,15 @@
-import React from 'react';
+/** @format */
+
+import React from "react";
 // import logo from './logo.svg';
 // import './App.css';
-import Hello from './components';
+import Hello from "./components";
 const App: React.FC = () => {
   return (
-    <div>
+    <div className="bp3-dark">
       <Hello />
     </div>
   );
-}
+};
 
 export default App;
