@@ -10,7 +10,7 @@ import {
 } from "./formItemInterface";
 import { Control } from "react-redux-form";
 
-class Input extends React.Component<InputType, IInputGroupExampleState> {
+class Text extends React.Component<InputType, IInputGroupExampleState> {
   public state: IInputGroupExampleState = {
     disabled: false,
     filterValue: "",
@@ -19,11 +19,6 @@ class Input extends React.Component<InputType, IInputGroupExampleState> {
     small: false,
     tagValue: "",
   };
-
-  componentDidMount() {
-    // console.log(this.props);
-  }
-
   render() {
     return (
       <InputGroup
@@ -35,6 +30,17 @@ class Input extends React.Component<InputType, IInputGroupExampleState> {
   }
 }
 
+const TextNumber = (props: any) => {
+  const { smaller } = props;
+  return (
+    <NumericInput
+      style={{
+        width: smaller ? "40%" : "100%"
+      }}
+    />
+  )
+}
+
 export const InputText = (props: RRFProps) => {
   return (
     <Control.text
@@ -42,19 +48,25 @@ export const InputText = (props: RRFProps) => {
       updateOn="blur"
       model={props.model}
       ignore={["focus"]}
-      component={Input}
+      component={Text}
     />
   );
 };
 
-export const InputNumber = (props: RRFProps) => {
+interface InputNumberProps extends RRFProps {
+  smaller?: boolean
+}
+export const InputNumber = (props: InputNumberProps) => {
   return (
     <Control.text
       defaultValue=""
       updateOn="blur"
       model={props.model}
       ignore={["focus"]}
-      component={NumericInput}
+      mapProps={{
+        smaller: () => props.smaller
+      }}
+      component={TextNumber}
     />
   );
 };
@@ -65,14 +77,7 @@ export const MutliInputNumber = (props: multiRRFProps) => {
     <>
       {models.map((item: string, index: number) => {
         return (
-          <Control.text
-            defaultValue=""
-            updateOn="blur"
-            model={item}
-            key={index}
-            ignore={["focus"]}
-            component={NumericInput}
-          />
+          <InputNumber smaller={true} model={item} key={index} />
         );
       })}
     </>

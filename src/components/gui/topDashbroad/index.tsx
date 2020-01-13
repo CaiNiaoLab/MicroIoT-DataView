@@ -10,12 +10,13 @@ import {
 import { updateComponentStyle } from "@/store/actions/operation";
 import { Container } from "@/components/gui/topDashbroad/style";
 import { connect } from "react-redux";
-import { MutliInputNumber } from "@/publicComponents/form";
+import { MutliInputNumber, InputText } from "@/publicComponents/form";
 import FormItem from "@/publicComponents/form/FormItem";
 import { Fieldset } from "react-redux-form";
 import { ButtonGroup, Button } from "@blueprintjs/core";
+import { Select } from '@blueprintjs/select';
 
-interface OwnProps {}
+interface OwnProps { }
 
 interface ExpandProps extends OwnProps {
   components: { [key: string]: Components };
@@ -23,32 +24,50 @@ interface ExpandProps extends OwnProps {
   updateComponentStyle(param: UpdateComponentStyleParamter): Function;
 }
 
-class TopDashBroad extends React.Component<ExpandProps> {
+class TopDashBroad extends React.Component<mapTypesToUnecessary<ExpandProps>> {
   render() {
     const { currentComponentId } = this.props;
     return (
       <Container>
-        <div className=""></div>
+        <div className="leftAction"></div>
         <Fieldset
-          className=""
+          className="centerAction"
           model={`componentStateManager.components.${currentComponentId}.style`}
         >
-          <div className="">
-            <FormItem labels="尺寸">
-              <MutliInputNumber
-                models={[".width", ".height"]}
-              ></MutliInputNumber>
-            </FormItem>
+          <div>
+            <div className="">
+              <FormItem labels="尺寸">
+                <MutliInputNumber
+                  models={[".width", ".height"]}
+                ></MutliInputNumber>
+              </FormItem>
+            </div>
+            <div className="">
+              <FormItem labels="位置">
+                <MutliInputNumber
+                  models={[".width", ".height"]}
+                ></MutliInputNumber>
+              </FormItem>
+            </div>
           </div>
-          <div className="">
-            <FormItem labels="位置">
-              <MutliInputNumber
-                models={[".width", ".height"]}
-              ></MutliInputNumber>
-            </FormItem>
+          <div>
+            <div className="">
+              <FormItem labels="旋转角度">
+                <InputText model=".rotate" />
+              </FormItem>
+            </div>
+            <div className="">
+              <FormItem labels="旋转中心">
+                {/* <Select>
+                  <option></option>
+                  <option></option>
+                </Select> */}
+              </FormItem>
+            </div>
           </div>
+
         </Fieldset>
-        <div className="">
+        <div className="rightAction">
           <div className="">
             <ButtonGroup>
               <Button>save</Button>

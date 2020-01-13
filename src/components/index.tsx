@@ -1,8 +1,9 @@
 /** @format */
 
 import React from "react";
+import Top from "@/components/gui/topDashbroad";
 
-export interface Props {}
+export interface Props { }
 interface State {
   isOld: boolean;
 }
@@ -21,7 +22,9 @@ export default class Hello extends React.Component<Props, object> {
           boxSizing: "border-box",
           // overflow:'hidden'
         }}
-      ></div>
+      >
+        <Top />
+      </div>
     );
   }
 }
