@@ -5,9 +5,9 @@ import uuid from "uuid";
 
 interface actionPayloadType
   extends action.ComponentsProperty,
-    action.ChangeComponentBoundType,
-    action.ComponentsOption,
-    action.ComponentsStyle {}
+  action.ChangeComponentBoundType,
+  action.ComponentsOption,
+  action.ComponentsStyle { }
 
 interface actionsType {
   type: string;
@@ -43,11 +43,14 @@ const defaultState: defaultStateType = {
     [componentId]: {
       componentTitle: "",
       componentName: "",
+      componentType: "echarts",
       isSelected: true,
       property: {
         style: {},
         option: {},
       },
+      prevComponents: null,
+      nextComponents: null
     },
   },
 };

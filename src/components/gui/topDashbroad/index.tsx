@@ -29,20 +29,24 @@ class TopDashBroad extends React.Component<mapTypesToUnecessary<ExpandProps>> {
     const { currentComponentId } = this.props;
     return (
       <Container>
-        <div className="leftAction"></div>
+        <div className="leftAction">
+          <Button>
+            添加组件
+          </Button>
+        </div>
         <Fieldset
           className="centerAction"
           model={`componentStateManager.components.${currentComponentId}.style`}
         >
-          <div>
-            <div className="">
+          <div className="headCenterColumn">
+            <div className="headCenterRow">
               <FormItem labels="尺寸">
                 <MutliInputNumber
                   models={[".width", ".height"]}
                 ></MutliInputNumber>
               </FormItem>
             </div>
-            <div className="">
+            <div className="headCenterRow">
               <FormItem labels="位置">
                 <MutliInputNumber
                   models={[".width", ".height"]}
@@ -50,13 +54,13 @@ class TopDashBroad extends React.Component<mapTypesToUnecessary<ExpandProps>> {
               </FormItem>
             </div>
           </div>
-          <div>
-            <div className="">
+          <div className="headCenterColumn">
+            <div className="headCenterRow">
               <FormItem labels="旋转角度">
                 <InputText model=".rotate" />
               </FormItem>
             </div>
-            <div className="">
+            <div className="headCenterRow">
               <FormItem labels="旋转中心">
                 {/* <Select>
                   <option></option>

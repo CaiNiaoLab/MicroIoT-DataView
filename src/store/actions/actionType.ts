@@ -40,8 +40,11 @@ export interface ChangeComponentBoundReturn {
 export interface Components {
   componentTitle: string;
   componentName: string;
+  componentType: string;
   isSelected: boolean;
   property: ComponentsProperty;
+  prevComponents: Components | null;
+  nextComponents: Components | null;
 }
 export interface ComponentsOption {
   x?: number;

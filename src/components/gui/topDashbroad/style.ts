@@ -12,7 +12,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   .leftAction{
-    flex:1;
+    flex:2;
     width:1px;
     height:100%;
   }
@@ -21,10 +21,26 @@ export const Container = styled.div`
     display:flex;
     height:100%;
     align-items:center;
-    justify-content:space-around;
+    justify-content:flex-start;
   }
   .rightAction{
     flex:1;
     height:100%;
+  }
+  .headCenterColumn{
+    display: flex; 
+    justify-content:center;
+    height:100%;
+    flex-direction:column;
+    width:30%;
+    // &:last-child{
+    //   flex:1;
+    // }
+  }
+  .headCenterRow{
+    display: flex;
+    align-items:space-around;
+    height:40%;
+    padding:5px;
   }
 `;

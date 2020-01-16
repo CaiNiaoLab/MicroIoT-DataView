@@ -2,6 +2,9 @@
 
 import React from "react";
 import Top from "@/components/gui/topDashbroad";
+import Center from "@/components/gui/center";
+import RightSide from "@/components/gui/rightside";
+import LeftSide from '@/components/gui/MenuList';
 
 export interface Props { }
 interface State {
@@ -14,16 +17,27 @@ export default class Hello extends React.Component<Props, object> {
   render() {
     return (
       <div
-        className="bp3-dark"
         style={{
-          display: "flex",
           height: "100vh",
           width: "100vw",
           boxSizing: "border-box",
-          // overflow:'hidden'
+          overflow: 'hidden'
         }}
       >
         <Top />
+        <div
+          className="bp3-dark"
+          style={{
+            display: "flex",
+            height: "90vh",
+            width: "100vw",
+            boxSizing: "border-box",
+            // overflow:'hidden'
+          }}>
+          <LeftSide />
+          <Center />
+          <RightSide />
+        </div>
       </div>
     );
   }
