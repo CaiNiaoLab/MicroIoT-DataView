@@ -17,8 +17,8 @@ const Container = styled.div`
   }
   .formItem {
     display: flex;
-    flex: 5;
-    justify-content: space-between;
+    flex: 4;
+    justify-content: space-around;
     align-items: center;
   }
 `;

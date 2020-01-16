@@ -9,6 +9,7 @@ import {
   multiRRFProps,
 } from "./formItemInterface";
 import { Control } from "react-redux-form";
+import styled from "styled-components";
 
 class Text extends React.Component<InputType, IInputGroupExampleState> {
   public state: IInputGroupExampleState = {
@@ -31,13 +32,8 @@ class Text extends React.Component<InputType, IInputGroupExampleState> {
 }
 
 const TextNumber = (props: any) => {
-  const { smaller } = props;
   return (
-    <NumericInput
-      style={{
-        width: smaller ? "40%" : "100%"
-      }}
-    />
+    <NumericInput fill={true} />
   )
 }
 
@@ -54,7 +50,8 @@ export const InputText = (props: RRFProps) => {
 };
 
 interface InputNumberProps extends RRFProps {
-  smaller?: boolean
+  smaller?: boolean;
+  // className: any;
 }
 export const InputNumber = (props: InputNumberProps) => {
   return (
@@ -71,13 +68,25 @@ export const InputNumber = (props: InputNumberProps) => {
   );
 };
 
+const MutliInputNumberContainer = styled.div`
+  width:40%;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  .subInputNumber{
+    width:40%;
+  }
+`
+
 export const MutliInputNumber = (props: multiRRFProps) => {
   const { models } = props;
   return (
     <>
       {models.map((item: string, index: number) => {
         return (
-          <InputNumber smaller={true} model={item} key={index} />
+          <MutliInputNumberContainer key={index} >
+            <InputNumber smaller={true} model={item} />
+          </MutliInputNumberContainer>
         );
       })}
     </>

@@ -53,7 +53,11 @@ class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
             e.stopPropagation();
           }}
         >
-          {children}
+          {
+            React.Children.map(children, (element: any) => {
+              return React.cloneElement(element, { ...selectComponent });
+            })
+          }
         </div>
       </Draggable>
     );
