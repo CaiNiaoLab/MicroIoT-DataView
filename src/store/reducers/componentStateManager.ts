@@ -1,13 +1,14 @@
 /** @format */
 
 import * as action from "../actions/actionType";
-import uuid from "uuid";
+import { produce } from "immer";
 
 interface actionPayloadType
   extends action.ComponentsProperty,
-  action.ChangeComponentBoundType,
-  action.ComponentsOption,
-  action.ComponentsStyle { }
+    action.ChangeComponentBoundType,
+    action.ComponentsOption,
+    action.ComponentsStyle,
+    action.AddNewComponent {}
 
 interface actionsType {
   type: string;
@@ -28,55 +29,51 @@ export interface defaultStateType {
   };
 }
 
-const componentId = uuid();
+// const defaultState: defaultStateType = {
+//   canvasType: "Traditional",
+//   canvasTitle: "Traditional",
+//   canvasName: "传统",
+//   canvasId: "",
+//   canvasHeigh: "",
+//   canvasWidth: "",
+//   canvasPart: "bottom",
+//   components: {
+//     [componentId]: {
+//       componentTitle: "",
+//       componentName: "",
+//       componentType: "echarts",
+//       isSelected: true,
+//       property: {
+//         style: {},
+//         option: {}
+//       },
+//       prevComponents: null,
+//       nextComponents: null
+//     }
+//   }
+// };
 
-const defaultState: defaultStateType = {
-  canvasType: "Traditional",
-  canvasTitle: "Traditional",
-  canvasName: "传统",
-  canvasId: "",
-  canvasHeigh: "",
-  canvasWidth: "",
-  canvasPart: "bottom",
-  currentComponentId: componentId,
-  components: {
-    [componentId]: {
-      componentTitle: "",
-      componentName: "",
-      componentType: "echarts",
-      isSelected: true,
-      property: {
-        style: {},
-        option: {},
-      },
-      prevComponents: null,
-      nextComponents: null
-    },
-  },
-};
-
-export const componentStateManager = (
-  state: defaultStateType = defaultState,
-  actions: actionsType,
-) => {
-  // state = unFreeze(state);
-  switch (actions.type) {
-    case action.INIT_STATE:
-      return state;
-    case action.UPDATE_COMPONENT_OPTION:
-      const components = Object.assign([], state.components);
-      return Object.assign({}, state, {
-        ...state,
-        components: components.map((item: action.Components) => {
-          if (item.isSelected) {
-            return Object.assign({}, item, {
-              property: { ...item.property, option: actions.payload },
-            });
-          }
-          return item;
-        }),
-      });
-    default:
-      return state;
+export const componentStateManager = produce(
+  (state: defaultStateType, actions: actionsType) => {
+    switch (actions.type) {
+      case action.ADD_NEW_COMPONENT: {
+        const { currentComponentId: componentId, component } = actions.payload;
+        state.currentComponentId = componentId;
+        state.components = { ...state.components, [componentId]: component };
+        return state;
+      }
+      case action.UPDATE_COMPONENT_OPTION: {
+        const components = state.components;
+        const componentId = state.currentComponentId;
+        const component = components[componentId]; //降低对象的深度
+        if (component.property?.option) {
+          component.property.option = actions.payload.option;
+        }
+        components[componentId] = component;
+        return state;
+      }
+      default:
+        return state;
+    }
   }
-};
+);

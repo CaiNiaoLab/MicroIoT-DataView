@@ -9,7 +9,7 @@ import {
   stateType,
   UpdateComponentOptionReturn,
   Components,
-  mapTypesToUnecessary,
+  mapTypesToUnecessary
 } from "../store/actions/actionType";
 
 interface ownProps {
@@ -31,7 +31,7 @@ class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
     if (updateComponentOption) {
       updateComponentOption({
         x: data.x,
-        y: data.y,
+        y: data.y
       });
     }
   };
@@ -40,6 +40,7 @@ class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
   };
   render() {
     const { children, selectComponent } = this.props;
+    const property = selectComponent ? selectComponent.property : undefined;
     return (
       <Draggable
         bounds="parent"
@@ -48,16 +49,14 @@ class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
         onStop={this.handlerDragStop}
       >
         <div
-          style={selectComponent?.property.style}
+          style={property?.style}
           onClick={(e: any) => {
             e.stopPropagation();
           }}
         >
-          {
-            React.Children.map(children, (element: any) => {
-              return React.cloneElement(element, { ...selectComponent });
-            })
-          }
+          {React.Children.map(children, (element: any) => {
+            return React.cloneElement(element, { ...selectComponent });
+          })}
         </div>
       </Draggable>
     );
@@ -74,13 +73,13 @@ const mapStateToProps: any = (state: stateType, ownProps: ownProps) => {
     console.log(error);
   }
   return {
-    selectComponent: selectComponent,
+    selectComponent: selectComponent
   };
 };
 const mapDispatchToProps = {
-  updateComponentOption,
+  updateComponentOption
 };
 export default connect<any, any, mapTypesToUnecessary<Props>>(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Dragger);

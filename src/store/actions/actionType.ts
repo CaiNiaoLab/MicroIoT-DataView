@@ -42,7 +42,7 @@ export interface Components {
   componentName: string;
   componentType: string;
   isSelected: boolean;
-  property: ComponentsProperty;
+  property?: ComponentsProperty;
   prevComponents: Components | null;
   nextComponents: Components | null;
 }
@@ -74,5 +74,9 @@ export interface UpdateComponentStyleReturn {
 }
 export interface AddNewComponentReturn {
   type: string;
-  payload: Components;
+  payload: AddNewComponent;
+}
+export interface AddNewComponent {
+  component: Components;
+  currentComponentId: string;
 }

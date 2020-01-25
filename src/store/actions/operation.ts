@@ -16,33 +16,34 @@ import {
   SELECT_COMPONENT,
   UPDATE_COMPONEN,
   UPDATE_COMPONENT_BY_FORN_ITEM,
+  AddNewComponent
 } from "./actionType";
 
 export const changeComponentBound = (
   payload: ChangeComponentBoundType = {
     canvasPart: "bottom",
-    canvasType: "Traditional",
-  },
+    canvasType: "Traditional"
+  }
 ): ChangeComponentBoundReturn => {
   return {
     type: CHANGE_COMPONENT_BOUND,
-    payload: payload,
+    payload: payload
   };
 };
 
 export const selectComponent = (payload: string) => {
   return {
     type: SELECT_COMPONENT,
-    payload: payload,
+    payload: payload
   };
 };
 
 export const updateComponentOption = (
-  payload: ComponentsOption,
+  payload: ComponentsOption
 ): UpdateComponentOptionReturn => {
   return {
     type: UPDATE_COMPONENT_OPTION,
-    payload: payload,
+    payload: payload
   };
 };
 export const updateComponentStyle = (payload: {
@@ -51,26 +52,28 @@ export const updateComponentStyle = (payload: {
 }): UpdateComponentStyleReturn => {
   return {
     type: UPDATE_COMPONENT_STYLE,
-    payload: payload,
+    payload: payload
   };
 };
 export const updateComponent = (
-  payload: Components,
+  payload: Components
 ): { type: string; payload: Components } => {
   return {
     type: UPDATE_COMPONEN,
-    payload: payload,
+    payload: payload
   };
 };
 export const updateComponentByFormItem = (payload: any) => {
   return {
     type: UPDATE_COMPONENT_BY_FORN_ITEM,
-    payload: payload,
+    payload: payload
   };
 };
-export const addNewComponent = (payload: Components): AddNewComponentReturn => {
+export const addNewComponent = (
+  payload: AddNewComponent
+): AddNewComponentReturn => {
   return {
     type: ADD_NEW_COMPONENT,
-    payload: payload,
+    payload: payload
   };
 };
