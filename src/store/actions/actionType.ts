@@ -42,9 +42,12 @@ export interface Components {
   componentName: string;
   componentType: string;
   isSelected: boolean;
-  property?: ComponentsProperty;
+  property: ComponentsProperty;
   prevComponents: Components | null;
   nextComponents: Components | null;
+}
+export interface ComponentsMap {
+  [key: string]: Components;
 }
 export interface ComponentsOption {
   x?: number;

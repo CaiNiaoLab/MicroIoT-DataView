@@ -3,8 +3,9 @@ import { ComponentsProperty } from "@/store/actions/actionType";
 let now = Date.now();
 const config: ComponentsProperty = {
   style: {
-    height: "200px",
-    width: "300px"
+    height: 200,
+    width: 300,
+    backgroundColor: "white"
   },
   option: {
     echarts: {

@@ -29,47 +29,22 @@ export interface defaultStateType {
   };
 }
 
-// const defaultState: defaultStateType = {
-//   canvasType: "Traditional",
-//   canvasTitle: "Traditional",
-//   canvasName: "传统",
-//   canvasId: "",
-//   canvasHeigh: "",
-//   canvasWidth: "",
-//   canvasPart: "bottom",
-//   components: {
-//     [componentId]: {
-//       componentTitle: "",
-//       componentName: "",
-//       componentType: "echarts",
-//       isSelected: true,
-//       property: {
-//         style: {},
-//         option: {}
-//       },
-//       prevComponents: null,
-//       nextComponents: null
-//     }
-//   }
-// };
-
 export const componentStateManager = produce(
   (state: defaultStateType, actions: actionsType) => {
     switch (actions.type) {
       case action.ADD_NEW_COMPONENT: {
         const { currentComponentId: componentId, component } = actions.payload;
+        const { currentComponentId } = state;
+        if (currentComponentId) {
+          state.components[currentComponentId].isSelected = false;
+        }
         state.currentComponentId = componentId;
         state.components = { ...state.components, [componentId]: component };
         return state;
       }
       case action.UPDATE_COMPONENT_OPTION: {
-        const components = state.components;
-        const componentId = state.currentComponentId;
-        const component = components[componentId]; //降低对象的深度
-        if (component.property?.option) {
-          component.property.option = actions.payload.option;
-        }
-        components[componentId] = component;
+        const currentID = state.currentComponentId;
+        state.components[currentID].property.option = actions.payload;
         return state;
       }
       default:

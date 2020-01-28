@@ -3,18 +3,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import Draggable, { DraggableEvent } from "react-draggable";
-import { defaultStateType } from "../store/reducers/componentStateManager";
+// import { defaultStateType } from "../store/reducers/componentStateManager";
 import { updateComponentOption } from "../store/actions/operation";
 import {
   stateType,
   UpdateComponentOptionReturn,
-  Components,
-  mapTypesToUnecessary
+  Components
+  // mapTypesToUnecessary
 } from "../store/actions/actionType";
 
 interface ownProps {
-  children: React.ReactNode;
-  componentId: string;
+  currentID: string;
 }
 
 interface Props extends ownProps {
@@ -25,7 +24,7 @@ interface Props extends ownProps {
   }): UpdateComponentOptionReturn;
 }
 
-class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
+class Dragger extends React.Component<Props, any> {
   handlerDrag = (e: DraggableEvent, data: any) => {
     const { updateComponentOption } = this.props;
     if (updateComponentOption) {
@@ -39,24 +38,29 @@ class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
     e.stopPropagation();
   };
   render() {
-    const { children, selectComponent } = this.props;
+    const { selectComponent, currentID } = this.props;
     const property = selectComponent ? selectComponent.property : undefined;
+    console.log(property?.style);
+    // const {option} = property;
     return (
       <Draggable
         bounds="parent"
         defaultPosition={{ x: 0, y: 0 }}
         onDrag={this.handlerDrag}
         onStop={this.handlerDragStop}
+        defaultClassName="draggerContainer"
+        position={{ x: property?.option.x || 0, y: property?.option.y || 0 }}
       >
         <div
-          style={property?.style}
+          style={{
+            height: property?.style.height + "px",
+            width: property?.style.width + "px"
+          }}
           onClick={(e: any) => {
             e.stopPropagation();
           }}
         >
-          {React.Children.map(children, (element: any) => {
-            return React.cloneElement(element, { ...selectComponent });
-          })}
+          {/* {currentID === componentId ? <div className="shadow"></div> : null} */}
         </div>
       </Draggable>
     );
@@ -65,10 +69,10 @@ class Dragger extends React.Component<mapTypesToUnecessary<Props>, any> {
 
 const mapStateToProps: any = (state: stateType, ownProps: ownProps) => {
   const { components } = state.componentStateManager;
-  const { componentId } = ownProps;
+  const { currentID } = ownProps;
   let selectComponent = null;
   try {
-    selectComponent = components[componentId];
+    selectComponent = components[currentID];
   } catch (error) {
     console.log(error);
   }
@@ -79,7 +83,7 @@ const mapStateToProps: any = (state: stateType, ownProps: ownProps) => {
 const mapDispatchToProps = {
   updateComponentOption
 };
-export default connect<any, any, mapTypesToUnecessary<Props>>(
+export default connect<any, any, any>(
   mapStateToProps,
   mapDispatchToProps
 )(Dragger);

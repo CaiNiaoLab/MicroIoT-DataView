@@ -6,7 +6,7 @@ import {
   IInputGroupExampleState,
   InputType,
   RRFProps,
-  multiRRFProps,
+  multiRRFProps
 } from "./formItemInterface";
 import { Control } from "react-redux-form";
 import styled from "styled-components";
@@ -18,7 +18,7 @@ class Text extends React.Component<InputType, IInputGroupExampleState> {
     large: false,
     showPassword: false,
     small: false,
-    tagValue: "",
+    tagValue: ""
   };
   render() {
     return (
@@ -32,10 +32,8 @@ class Text extends React.Component<InputType, IInputGroupExampleState> {
 }
 
 const TextNumber = (props: any) => {
-  return (
-    <NumericInput fill={true} />
-  )
-}
+  return <NumericInput fill={true} />;
+};
 
 export const InputText = (props: RRFProps) => {
   return (
@@ -56,27 +54,26 @@ interface InputNumberProps extends RRFProps {
 export const InputNumber = (props: InputNumberProps) => {
   return (
     <Control.text
-      defaultValue=""
       updateOn="blur"
       model={props.model}
       ignore={["focus"]}
-      mapProps={{
-        smaller: () => props.smaller
-      }}
-      component={TextNumber}
+      // mapProps={{
+      //   smaller: () => props.smaller
+      // }}
+      component={Text}
     />
   );
 };
 
 const MutliInputNumberContainer = styled.div`
-  width:40%;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  .subInputNumber{
-    width:40%;
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .subInputNumber {
+    width: 40%;
   }
-`
+`;
 
 export const MutliInputNumber = (props: multiRRFProps) => {
   const { models } = props;
@@ -84,7 +81,7 @@ export const MutliInputNumber = (props: multiRRFProps) => {
     <>
       {models.map((item: string, index: number) => {
         return (
-          <MutliInputNumberContainer key={index} >
+          <MutliInputNumberContainer key={index}>
             <InputNumber smaller={true} model={item} />
           </MutliInputNumberContainer>
         );

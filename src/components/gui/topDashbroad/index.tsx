@@ -19,7 +19,7 @@ import FormItem from "@/publicComponents/form/FormItem";
 import { Fieldset } from "react-redux-form";
 import { ButtonGroup, Button } from "@blueprintjs/core";
 import uuid from "uuid";
-import { Select } from "@blueprintjs/select";
+// import { Select } from "@blueprintjs/select";
 
 interface OwnProps {}
 
@@ -39,13 +39,13 @@ class TopDashBroad extends React.Component<ExpandProps> {
       componentType: "echarts",
       isSelected: true,
       prevComponents: null,
-      nextComponents: null
+      nextComponents: null,
+      property: (await import("@/components/comps_instance/echarts/config"))
+        .default
     };
-    const property = (
-      await import("@/components/comps_instance/echarts/config")
-    ).default;
+    // const property = ;
     const { addNewComponent } = this.props;
-    componentStruct.property = property;
+    // componentStruct.property = property;
     addNewComponent({
       currentComponentId: componentId,
       component: componentStruct
@@ -53,6 +53,8 @@ class TopDashBroad extends React.Component<ExpandProps> {
   };
   render() {
     const { currentComponentId } = this.props;
+    console.log(currentComponentId);
+
     return (
       <Container>
         <div className="leftAction">
@@ -61,38 +63,26 @@ class TopDashBroad extends React.Component<ExpandProps> {
         {currentComponentId ? (
           <Fieldset
             className="centerAction"
-            model={`componentStateManager.components.${currentComponentId}.style`}
+            model={`componentStateManager.components.${currentComponentId}.property`}
           >
             <div className="headCenterColumn">
-              <div className="headCenterRow">
+              <Fieldset model=".style" className="headCenterRow">
                 <FormItem labels="尺寸">
                   <MutliInputNumber
                     models={[".width", ".height"]}
                   ></MutliInputNumber>
                 </FormItem>
-              </div>
-              {currentComponentId ? (
-                <div className="headCenterRow">
-                  <FormItem labels="位置">
-                    <MutliInputNumber
-                      models={[".top", ".left"]}
-                    ></MutliInputNumber>
-                  </FormItem>
-                </div>
-              ) : null}
+              </Fieldset>
+              <Fieldset model=".option" className="headCenterRow">
+                <FormItem labels="位置">
+                  <MutliInputNumber models={[".x", ".y"]}></MutliInputNumber>
+                </FormItem>
+              </Fieldset>
             </div>
             <div className="headCenterColumn">
               <div className="headCenterRow">
                 <FormItem labels="旋转角度">
                   <InputText model=".rotate" />
-                </FormItem>
-              </div>
-              <div className="headCenterRow">
-                <FormItem labels="旋转中心">
-                  {/* <Select>
-                <option></option>
-                <option></option>
-              </Select> */}
                 </FormItem>
               </div>
             </div>
