@@ -1,12 +1,12 @@
 /** @format */
 
 import React from "react";
-import { NumericInput, InputGroup } from "@blueprintjs/core";
+import { InputGroup } from "@blueprintjs/core";
 import {
   IInputGroupExampleState,
   InputType,
   RRFProps,
-  multiRRFProps
+  multiRRFProps,
 } from "./formItemInterface";
 import { Control } from "react-redux-form";
 import styled from "styled-components";
@@ -18,7 +18,7 @@ class Text extends React.Component<InputType, IInputGroupExampleState> {
     large: false,
     showPassword: false,
     small: false,
-    tagValue: ""
+    tagValue: "",
   };
   render() {
     return (
@@ -31,9 +31,9 @@ class Text extends React.Component<InputType, IInputGroupExampleState> {
   }
 }
 
-const TextNumber = (props: any) => {
-  return <NumericInput fill={true} />;
-};
+// const TextNumber = (props: any) => {
+//   return <NumericInput fill={true} />;
+// };
 
 export const InputText = (props: RRFProps) => {
   return (

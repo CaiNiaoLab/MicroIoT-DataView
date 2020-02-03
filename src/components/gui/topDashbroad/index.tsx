@@ -5,12 +5,12 @@ import {
   Components,
   UpdateComponentStyleParamter,
   stateType,
-  mapTypesToUnecessary,
-  AddNewComponent
+  // mapTypesToUnecessary,
+  AddNewComponent,
 } from "@/store/actions/actionType";
 import {
   updateComponentStyle,
-  addNewComponent
+  addNewComponent,
 } from "@/store/actions/operation";
 import { Container } from "@/components/gui/topDashbroad/style";
 import { connect } from "react-redux";
@@ -41,20 +41,18 @@ class TopDashBroad extends React.Component<ExpandProps> {
       prevComponents: null,
       nextComponents: null,
       property: (await import("@/components/comps_instance/echarts/config"))
-        .default
+        .default,
     };
     // const property = ;
     const { addNewComponent } = this.props;
     // componentStruct.property = property;
     addNewComponent({
       currentComponentId: componentId,
-      component: componentStruct
+      component: componentStruct,
     });
   };
   render() {
     const { currentComponentId } = this.props;
-    console.log(currentComponentId);
-
     return (
       <Container>
         <div className="leftAction">
@@ -66,16 +64,18 @@ class TopDashBroad extends React.Component<ExpandProps> {
             model={`componentStateManager.components.${currentComponentId}.property`}
           >
             <div className="headCenterColumn">
-              <Fieldset model=".style" className="headCenterRow">
+              <Fieldset model=".option.rect" className="headCenterRow">
                 <FormItem labels="尺寸">
                   <MutliInputNumber
-                    models={[".width", ".height"]}
+                    models={[".rWidth", ".rHeight"]}
                   ></MutliInputNumber>
                 </FormItem>
               </Fieldset>
-              <Fieldset model=".option" className="headCenterRow">
+              <Fieldset model=".option.rect" className="headCenterRow">
                 <FormItem labels="位置">
-                  <MutliInputNumber models={[".x", ".y"]}></MutliInputNumber>
+                  <MutliInputNumber
+                    models={[".rLeft", ".rTop"]}
+                  ></MutliInputNumber>
                 </FormItem>
               </Fieldset>
             </div>
@@ -116,22 +116,20 @@ class TopDashBroad extends React.Component<ExpandProps> {
   }
 }
 
-const mapStatToProps: any = (
-  state: stateType
-): mapTypesToUnecessary<ExpandProps> => {
+const mapStatToProps: any = (state: stateType) => {
   const store = state.componentStateManager;
   return {
     currentComponentId: store.currentComponentId,
-    components: store.components
+    components: store.components,
   };
 };
 
 const mapDispatchToProps = {
   updateComponentStyle,
-  addNewComponent
+  addNewComponent,
 };
 
 export default connect<any, any, any>(
   mapStatToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TopDashBroad);

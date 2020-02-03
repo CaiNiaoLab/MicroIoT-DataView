@@ -8,7 +8,8 @@ interface actionPayloadType
     action.ChangeComponentBoundType,
     action.ComponentsOption,
     action.ComponentsStyle,
-    action.AddNewComponent {}
+    action.AddNewComponent,
+    action.ComponentRect {}
 
 interface actionsType {
   type: string;
@@ -16,21 +17,27 @@ interface actionsType {
 }
 
 export interface defaultStateType {
-  canvasType: "Traditional" | "CrossDivision";
-  canvasTitle: "Traditional" | "CrossDivision";
-  canvasName: "传统" | "十字";
   canvasId: string;
   canvasHeigh: string | number;
   canvasWidth: string | number;
   canvasPart: string;
-  currentComponentId: string;
-  components: {
-    [key: string]: action.Components;
-  };
+  currentComponentId: keyof action.ComponentsMap;
+  componentsIds: (keyof action.ComponentsMap)[];
+  components: action.ComponentsMap;
 }
 
+const defaultState = {
+  canvasId: "",
+  canvasHeigh: "",
+  canvasWidth: "",
+  canvasPart: "",
+  currentComponentId: "",
+  componentsIds: [],
+  components: {},
+};
+
 export const componentStateManager = produce(
-  (state: defaultStateType, actions: actionsType) => {
+  (state: defaultStateType = defaultState, actions: actionsType) => {
     switch (actions.type) {
       case action.ADD_NEW_COMPONENT: {
         const { currentComponentId: componentId, component } = actions.payload;
@@ -38,6 +45,7 @@ export const componentStateManager = produce(
         if (currentComponentId) {
           state.components[currentComponentId].isSelected = false;
         }
+        state.componentsIds.push(componentId);
         state.currentComponentId = componentId;
         state.components = { ...state.components, [componentId]: component };
         return state;
@@ -47,8 +55,17 @@ export const componentStateManager = produce(
         state.components[currentID].property.option = actions.payload;
         return state;
       }
+      case action.UPDATE_COMPONENT_RECT: {
+        const currentID = state.currentComponentId;
+        const { rect } = state.components[currentID].property.option;
+        state.components[currentID].property.option.rect = {
+          ...rect,
+          ...actions.payload,
+        };
+        return state;
+      }
       default:
         return state;
     }
-  }
+  },
 );

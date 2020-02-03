@@ -14,6 +14,7 @@ export const UPDATE_COMPONENT_OPTION = "UPDATE_COMPONENT_OPTION";
 export const UPDATE_COMPONENT_STYLE = "UPDATE_COMPONENT_STYLE";
 export const SELECT_COMPONENT = "SELECT_COMPONENT";
 export const UPDATE_COMPONENT_BY_FORN_ITEM = "UPDATE_COMPONENT_BY_FORN_ITEM";
+export const UPDATE_COMPONENT_RECT = "UPDATE_COMPONENT_RECT";
 
 export type mapTypesToInterface<T> = {
   [K in keyof T]: T[K];
@@ -49,9 +50,14 @@ export interface Components {
 export interface ComponentsMap {
   [key: string]: Components;
 }
+export interface ComponentRect {
+  rTop?: number;
+  rLeft?: number;
+  rHeight?: string;
+  rWidth?: string;
+}
 export interface ComponentsOption {
-  x?: number;
-  y?: number;
+  rect?: ComponentRect;
   echarts?: {};
   content?: string;
 }

@@ -4,11 +4,11 @@ import React from "react";
 import { connect } from "react-redux";
 import Draggable, { DraggableEvent } from "react-draggable";
 // import { defaultStateType } from "../store/reducers/componentStateManager";
-import { updateComponentOption } from "../store/actions/operation";
+import { updateComponentRect } from "../store/actions/operation";
 import {
   stateType,
-  UpdateComponentOptionReturn,
-  Components
+  // UpdateComponentOptionReturn,
+  Components,
   // mapTypesToUnecessary
 } from "../store/actions/actionType";
 
@@ -18,19 +18,16 @@ interface ownProps {
 
 interface Props extends ownProps {
   selectComponent: Components;
-  updateComponentOption?(payload: {
-    x: number;
-    y: number;
-  }): UpdateComponentOptionReturn;
+  updateComponentRect?(payload: { rLeft: number; rTop: number }): any;
 }
 
 class Dragger extends React.Component<Props, any> {
   handlerDrag = (e: DraggableEvent, data: any) => {
-    const { updateComponentOption } = this.props;
-    if (updateComponentOption) {
-      updateComponentOption({
-        x: data.x,
-        y: data.y
+    const { updateComponentRect } = this.props;
+    if (updateComponentRect) {
+      updateComponentRect({
+        rLeft: data.x,
+        rTop: data.y,
       });
     }
   };
@@ -38,9 +35,8 @@ class Dragger extends React.Component<Props, any> {
     e.stopPropagation();
   };
   render() {
-    const { selectComponent, currentID } = this.props;
+    const { selectComponent } = this.props;
     const property = selectComponent ? selectComponent.property : undefined;
-    console.log(property?.style);
     // const {option} = property;
     return (
       <Draggable
@@ -49,17 +45,21 @@ class Dragger extends React.Component<Props, any> {
         onDrag={this.handlerDrag}
         onStop={this.handlerDragStop}
         defaultClassName="draggerContainer"
-        position={{ x: property?.option.x || 0, y: property?.option.y || 0 }}
+        position={{
+          x: property?.option.rect?.rLeft || 0,
+          y: property?.option.rect?.rTop || 0,
+        }}
       >
         <div
           style={{
-            height: property?.style.height + "px",
-            width: property?.style.width + "px"
+            height: property?.option.rect?.rHeight + "px",
+            width: property?.option.rect?.rWidth + "px",
           }}
           onClick={(e: any) => {
             e.stopPropagation();
           }}
         >
+          1
           {/* {currentID === componentId ? <div className="shadow"></div> : null} */}
         </div>
       </Draggable>
@@ -77,13 +77,13 @@ const mapStateToProps: any = (state: stateType, ownProps: ownProps) => {
     console.log(error);
   }
   return {
-    selectComponent: selectComponent
+    selectComponent: selectComponent,
   };
 };
 const mapDispatchToProps = {
-  updateComponentOption
+  updateComponentRect,
 };
 export default connect<any, any, any>(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Dragger);
