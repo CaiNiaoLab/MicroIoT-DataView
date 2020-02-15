@@ -7,6 +7,7 @@ import { Container, ListItemContainer } from "@/components/gui/MenuList/style";
 import { connect } from "react-redux";
 import { stateType } from "@/store/actions/actionType";
 import { store } from "@/store";
+import { Icon } from "@blueprintjs/core";
 
 interface ListProps {
   componentsKeysArray: string[];
@@ -34,19 +35,27 @@ class ComponentsList extends React.Component<ListProps> {
   render() {
     const { componentsKeysArray } = this.props;
     const {
-      components
+      components,
     } = (store.getState() as stateType).componentStateManager;
     return (
-      <Draggable>
+      <Draggable defaultClassName="leftSide">
         <Container>
-          {componentsKeysArray.map((item: any, index: number) => (
-            <ListItem
-              componentId={item}
-              componentTitle={components[item].componentTitle}
-              isSelect={components[item].isSelected}
-              key={index}
-            />
-          ))}
+          <div className="menuHeader">
+            <div className="menuTitle">组件列表</div>
+            <div>
+              <Icon icon="cross" />
+            </div>
+          </div>
+          <div className="menuContainer">
+            {componentsKeysArray.map((item: any, index: number) => (
+              <ListItem
+                componentId={item}
+                componentTitle={components[item].componentTitle}
+                isSelect={components[item].isSelected}
+                key={index}
+              />
+            ))}
+          </div>
         </Container>
       </Draggable>
     );
@@ -57,7 +66,7 @@ const mapStateToProps = (state: stateType) => {
   const { components } = state.componentStateManager;
   const componentsKeysArray = Object.keys(components || []);
   return {
-    componentsKeysArray: componentsKeysArray
+    componentsKeysArray: componentsKeysArray,
   };
 };
 

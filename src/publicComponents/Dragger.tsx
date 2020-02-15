@@ -46,8 +46,8 @@ class Dragger extends React.Component<Props, any> {
         onStop={this.handlerDragStop}
         defaultClassName="draggerContainer"
         position={{
-          x: property?.option.rect?.rLeft || 0,
-          y: property?.option.rect?.rTop || 0,
+          x: parseInt(property?.option.rect?.rLeft + "") || 0,
+          y: parseInt(property?.option.rect?.rTop + "") || 0,
         }}
       >
         <div

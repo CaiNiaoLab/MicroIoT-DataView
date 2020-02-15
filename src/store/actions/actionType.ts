@@ -15,6 +15,8 @@ export const UPDATE_COMPONENT_STYLE = "UPDATE_COMPONENT_STYLE";
 export const SELECT_COMPONENT = "SELECT_COMPONENT";
 export const UPDATE_COMPONENT_BY_FORN_ITEM = "UPDATE_COMPONENT_BY_FORN_ITEM";
 export const UPDATE_COMPONENT_RECT = "UPDATE_COMPONENT_RECT";
+export const CLOSE_COMPONENT_LIST = "CLOSE_COMPONENT_LIST";
+export const HIDE_COMPONENT_LIST = "HIDE_COMPONENT_LIST";
 
 export type mapTypesToInterface<T> = {
   [K in keyof T]: T[K];
@@ -38,21 +40,31 @@ export interface ChangeComponentBoundReturn {
   payload: ChangeComponentBoundType;
 }
 
+export interface ComponentsDataset {
+  mockdata: { data: any };
+  dataMap: {
+    componentId: keyof ComponentsMap;
+    datasetId: string;
+  };
+}
+
 export interface Components {
   componentTitle: string;
   componentName: string;
   componentType: string;
   isSelected: boolean;
   property: ComponentsProperty;
+  dataset?: ComponentsDataset;
   prevComponents: Components | null;
   nextComponents: Components | null;
 }
 export interface ComponentsMap {
   [key: string]: Components;
 }
+export type ComponentsMapKeysType = keyof ComponentsMap;
 export interface ComponentRect {
-  rTop?: number;
-  rLeft?: number;
+  rTop?: string;
+  rLeft?: string;
   rHeight?: string;
   rWidth?: string;
 }
@@ -89,3 +101,4 @@ export interface AddNewComponent {
   component: Components;
   currentComponentId: string;
 }
+export type SelectComponent = keyof Components;

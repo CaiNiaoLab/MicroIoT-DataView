@@ -107,6 +107,7 @@ class TopDashBroad extends React.Component<ExpandProps> {
               <Button>save</Button>
               <Button>export</Button>
               <Button>import</Button>
+              <Button>preview</Button>
             </ButtonGroup>
           </div>
           <div className=""></div>

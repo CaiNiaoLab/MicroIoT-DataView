@@ -18,10 +18,14 @@ interface actionsType {
 
 export interface defaultStateType {
   canvasId: string;
+
   canvasHeigh: string | number;
   canvasWidth: string | number;
   canvasPart: string;
-  currentComponentId: keyof action.ComponentsMap;
+  currentComponentId:
+    | keyof action.ComponentsMap
+    | (keyof action.ComponentsMap)[]
+    | null;
   componentsIds: (keyof action.ComponentsMap)[];
   components: action.ComponentsMap;
 }
@@ -31,7 +35,7 @@ const defaultState = {
   canvasHeigh: "",
   canvasWidth: "",
   canvasPart: "",
-  currentComponentId: "",
+  currentComponentId: null,
   componentsIds: [],
   components: {},
 };
@@ -42,7 +46,7 @@ export const componentStateManager = produce(
       case action.ADD_NEW_COMPONENT: {
         const { currentComponentId: componentId, component } = actions.payload;
         const { currentComponentId } = state;
-        if (currentComponentId) {
+        if (typeof currentComponentId === "string") {
           state.components[currentComponentId].isSelected = false;
         }
         state.componentsIds.push(componentId);
@@ -52,16 +56,28 @@ export const componentStateManager = produce(
       }
       case action.UPDATE_COMPONENT_OPTION: {
         const currentID = state.currentComponentId;
-        state.components[currentID].property.option = actions.payload;
+        if (typeof currentID === "string") {
+          state.components[currentID].property.option = actions.payload;
+        }
         return state;
       }
       case action.UPDATE_COMPONENT_RECT: {
         const currentID = state.currentComponentId;
-        const { rect } = state.components[currentID].property.option;
-        state.components[currentID].property.option.rect = {
-          ...rect,
-          ...actions.payload,
-        };
+        // const { rect } = state.components[currentID].property.option;
+        let rect;
+        if (typeof currentID === "string") {
+          rect = state.components[currentID].property.option;
+          state.components[currentID].property.option.rect = {
+            ...rect,
+            ...actions.payload,
+          };
+        }
+        // if(Array.isArray(currentID)){
+        //   currentID.map((key:keyof action.ComponentsMap)=>{
+
+        //   })
+        // }
+
         return state;
       }
       default:

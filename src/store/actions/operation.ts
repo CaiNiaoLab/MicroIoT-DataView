@@ -19,6 +19,7 @@ import {
   AddNewComponent,
   ComponentRect,
   UPDATE_COMPONENT_RECT,
+  CLOSE_COMPONENT_LIST,
 } from "./actionType";
 
 export const changeComponentBound = (
@@ -82,6 +83,20 @@ export const addNewComponent = (
 ): AddNewComponentReturn => {
   return {
     type: ADD_NEW_COMPONENT,
+    payload: payload,
+  };
+};
+
+export const CloseComponentList = (payload: boolean) => {
+  return {
+    type: CLOSE_COMPONENT_LIST,
+    payload: payload,
+  };
+};
+
+export const HideComponentList = (payload: boolean) => {
+  return {
+    type: CLOSE_COMPONENT_LIST,
     payload: payload,
   };
 };

@@ -4,44 +4,57 @@ import React from "react";
 import Top from "@/components/gui/topDashbroad";
 import Center from "@/components/gui/center";
 import RightSide from "@/components/gui/rightside";
-// import LeftSide from "@/components/gui/MenuList";
+import { connect } from "react-redux";
+import { stateType } from "@/store/actions/actionType";
+import LeftSide from "@/components/gui/MenuList";
+import styled from "styled-components";
 // import { store } from "@/store";
 // import { stateType } from "@/store/actions/actionType";
 
-export interface Props {}
-interface State {
-  isOld: boolean;
+interface Props {
+  listLenght: number;
 }
-export default class Hello extends React.Component<Props, object> {
+
+const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  .mid {
+    display: flex;
+    height: 90vh;
+    width: 100vw;
+    box-sizing: border-box;
+    background-color: #30404d;
+    position: relative;
+    .leftSide {
+      position: absolute;
+      height: 100%;
+      z-index: 10;
+    }
+  }
+`;
+
+class Hello extends React.Component<Props, object> {
   render() {
     // const state: stateType = store.getState();
+    const { listLenght } = this.props;
     return (
-      <div
-        style={{
-          height: "100vh",
-          width: "100vw",
-          boxSizing: "border-box",
-          overflow: "hidden",
-        }}
-      >
+      <Container>
         <Top />
-        <div
-          className="bp3-dark"
-          style={{
-            display: "flex",
-            height: "90vh",
-            width: "100vw",
-            boxSizing: "border-box",
-            backgroundColor: "#30404d",
-            position: "relative",
-            // overflow:'hidden'
-          }}
-        >
-          {/* <LeftSide /> */}
+        <div className="bp3-dark mid">
+          {listLenght ? <LeftSide /> : null}
           <Center />
           <RightSide />
         </div>
-      </div>
+      </Container>
     );
   }
 }
+const mapStateToProps = (state: stateType) => {
+  const { componentsIds } = state.componentStateManager;
+  return {
+    listLenght: componentsIds.length,
+  };
+};
+export default connect(mapStateToProps)(Hello);

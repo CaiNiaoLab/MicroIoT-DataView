@@ -8,7 +8,7 @@ export const Container = styled.div`
   height: 100%;
   position: relative;
   .draggerContainer {
-    // position: absolute;
+    position: absolute;
     z-index: 10;
     .shadow {
       position: absolute;

@@ -1,7 +1,8 @@
 /** @format */
 
 import React from "react";
-import { InputGroup } from "@blueprintjs/core";
+import { InputGroup, Button } from "@blueprintjs/core";
+import { Select, IItemRendererProps } from "@blueprintjs/select";
 import {
   IInputGroupExampleState,
   InputType,
@@ -10,6 +11,7 @@ import {
 } from "./formItemInterface";
 import { Control } from "react-redux-form";
 import styled from "styled-components";
+// import { SketchPicker } from "react-color";
 
 class Text extends React.Component<InputType, IInputGroupExampleState> {
   public state: IInputGroupExampleState = {
@@ -86,6 +88,60 @@ export const MutliInputNumber = (props: multiRRFProps) => {
           </MutliInputNumberContainer>
         );
       })}
+    </>
+  );
+};
+
+interface FormSelectRRFProps extends RRFProps {
+  items: any;
+  label: any;
+}
+
+const CustomSelect = (props: any) => {
+  const { items, label, change } = props;
+  console.log(props);
+
+  const FilmSelect = Select.ofType<any>();
+  const selectItem = (item: any, itemProps: IItemRendererProps) => {
+    return (
+      <option key={itemProps.index} value={item.key}>
+        {item.value}
+      </option>
+    );
+  };
+
+  return (
+    <FilmSelect itemRenderer={selectItem} onItemSelect={change} items={items}>
+      <Button>请选择{label}</Button>
+    </FilmSelect>
+  );
+};
+export const FormSelect = (props: FormSelectRRFProps) => {
+  const { model, items, label } = props;
+  return (
+    <Control
+      model={model}
+      mapProps={({ onChange, viewValue }) => ({
+        change: onChange,
+        items: items,
+        label: label,
+        value: viewValue,
+      })}
+      component={CustomSelect}
+    />
+  );
+};
+
+export const ColorPicker = (props: RRFProps) => {
+  const { model } = props;
+  return (
+    <>
+      <Control
+        model={model}
+        mapProps={{
+          customChange: props => props.onChange,
+        }}
+      />
     </>
   );
 };

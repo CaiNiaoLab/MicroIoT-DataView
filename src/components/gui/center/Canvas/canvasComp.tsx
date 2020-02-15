@@ -36,6 +36,8 @@ export class CanvasComp extends React.Component<Props> {
     current.style.cssText += getCssText(rect);
   }
 
+  handleClick = () => {};
+
   shouldComponentUpdate(nextProps: Props) {
     const { option } = this.props;
     const { option: nextOption } = nextProps;
