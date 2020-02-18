@@ -8,6 +8,7 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  padding: 1%;
   align-items: center;
   background-color: #222;
 `;
