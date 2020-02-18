@@ -18,7 +18,6 @@ interface actionsType {
 
 export interface defaultStateType {
   canvasId: string;
-
   canvasHeigh: string | number;
   canvasWidth: string | number;
   canvasPart: string;
