@@ -38,6 +38,8 @@ class TopDashBroad extends React.Component<ExpandProps> {
       componentName: "",
       componentType: "echarts",
       isSelected: true,
+      isLock: false,
+      isHide: false,
       prevComponents: null,
       nextComponents: null,
       property: (await import("@/components/comps_instance/echarts/config"))

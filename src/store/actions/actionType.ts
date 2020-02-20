@@ -53,6 +53,8 @@ export interface Components {
   componentName: string;
   componentType: string;
   isSelected: boolean;
+  isLock: boolean;
+  isHide: boolean;
   property: ComponentsProperty;
   dataset?: ComponentsDataset;
   prevComponents: Components | null;
@@ -101,4 +103,7 @@ export interface AddNewComponent {
   component: Components;
   currentComponentId: string;
 }
-export type SelectComponent = keyof Components;
+export interface selectComponent {
+  componentId: keyof ComponentsMap | (keyof ComponentsMap)[];
+}
+export type SelectedComponent = keyof Components;

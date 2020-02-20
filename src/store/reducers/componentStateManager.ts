@@ -9,7 +9,8 @@ interface actionPayloadType
     action.ComponentsOption,
     action.ComponentsStyle,
     action.AddNewComponent,
-    action.ComponentRect {}
+    action.ComponentRect,
+    action.selectComponent {}
 
 interface actionsType {
   type: string;
@@ -29,6 +30,9 @@ export interface defaultStateType {
   components: action.ComponentsMap;
 }
 
+interface reducerFunc {
+  (state: defaultStateType, actions: actionsType): defaultStateType;
+}
 const defaultState = {
   canvasId: "",
   canvasHeigh: "",
@@ -37,6 +41,21 @@ const defaultState = {
   currentComponentId: null,
   componentsIds: [],
   components: {},
+};
+
+const selectComponentHandle: reducerFunc = (state, actions) => {
+  const { componentId } = actions.payload;
+  const changeSelectStatus = (componentId: keyof action.ComponentsMap) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    state.components[componentId].isSelected = !state.components[componentId]
+      .isSelected;
+  };
+  if (Array.isArray(componentId)) {
+    componentId.map(item => changeSelectStatus);
+  } else {
+    changeSelectStatus(componentId);
+  }
+  return state;
 };
 
 export const componentStateManager = produce(
@@ -78,6 +97,15 @@ export const componentStateManager = produce(
         // }
 
         return state;
+      }
+      case action.SELECT_COMPONENT: {
+        selectComponentHandle(state, actions);
+        // const { isLock, isSelected } = state.components[componentId];
+        // if (!isLock) {
+        //   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        //   state.components[componentId].isSelected = !isSelected;
+        // }
+        break;
       }
       default:
         return state;

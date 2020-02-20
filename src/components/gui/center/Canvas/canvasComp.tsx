@@ -9,6 +9,7 @@ import {
 } from "@/store/actions/actionType";
 import { connect } from "react-redux";
 import getCssText from "@/utils/getCssText";
+import { selectComponent } from "@/store/actions/operation";
 
 // const Container = styled.div`
 //   position: absolute;
@@ -22,6 +23,7 @@ interface Props extends ownProps {
   style: React.CSSProperties;
   option: ComponentsOption;
   componentType: string;
+  selectComponent: Function;
 }
 
 export class CanvasComp extends React.Component<Props> {
@@ -36,7 +38,10 @@ export class CanvasComp extends React.Component<Props> {
     current.style.cssText += getCssText(rect);
   }
 
-  handleClick = () => {};
+  handleClick = () => {
+    const { selectComponent, currentID } = this.props;
+    selectComponent(currentID);
+  };
 
   shouldComponentUpdate(nextProps: Props) {
     const { option } = this.props;
@@ -69,6 +74,7 @@ export class CanvasComp extends React.Component<Props> {
         style={{
           position: "absolute",
         }}
+        onClick={this.handleClick}
       >
         <Suspense fallback={<>loading....</>}>
           <Lazy ref={this.LazyRef} componentId={currentID} option={option} />
@@ -90,4 +96,8 @@ const mapStateToProps = (state: stateType, ownProps: ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(CanvasComp);
+const mapDispatchToProps = {
+  selectComponent: selectComponent,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CanvasComp);
