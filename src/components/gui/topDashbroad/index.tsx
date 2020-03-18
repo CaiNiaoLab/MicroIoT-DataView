@@ -32,7 +32,7 @@ interface ExpandProps extends OwnProps {
 
 class TopDashBroad extends React.Component<ExpandProps> {
   public addComponent = async () => {
-    const componentId = uuid();
+    const componentId = uuid();//32位，可选由后端生成
     const componentStruct: Components = {
       componentTitle: "",
       componentName: "",

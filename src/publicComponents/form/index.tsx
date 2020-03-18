@@ -95,11 +95,12 @@ export const MutliInputNumber = (props: multiRRFProps) => {
 interface FormSelectRRFProps extends RRFProps {
   items: any;
   label: any;
+  activeItem: string;
 }
 
 const CustomSelect = (props: any) => {
   const { items, label, change } = props;
-  console.log(props);
+  console.log('[CustomSelect]' + JSON.stringify(props));
 
   const FilmSelect = Select.ofType<any>();
   const selectItem = (item: any, itemProps: IItemRendererProps) => {
@@ -118,8 +119,9 @@ const CustomSelect = (props: any) => {
 };
 export const FormSelect = (props: FormSelectRRFProps) => {
   const { model, items, label } = props;
+  console.log('[FormSelect]' + JSON.stringify(props))
   return (
-    <Control
+    <Control.custom
       model={model}
       mapProps={({ onChange, viewValue }) => ({
         change: onChange,
