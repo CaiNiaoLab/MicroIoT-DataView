@@ -1,6 +1,6 @@
 /** @format */
 
-import { defaultStateType } from "../reducers/componentStateManager";
+import { defaultStateType } from "@/store/reducers/types";
 
 export const ADD_NEW_COMPONENT = "ADD_NEW_COMPONENT";
 export const INIT_STATE = "INIT_STATE",
