@@ -5,12 +5,12 @@ import { produce } from "immer";
 
 interface actionPayloadType
   extends action.ComponentsProperty,
-    action.ChangeComponentBoundType,
-    action.ComponentsOption,
-    action.ComponentsStyle,
-    action.AddNewComponent,
-    action.ComponentRect,
-    action.selectComponent {}
+  action.ChangeComponentBoundType,
+  action.ComponentsOption,
+  action.ComponentsStyle,
+  action.AddNewComponent,
+  action.ComponentRect,
+  action.selectComponent { }
 
 interface actionsType {
   type: string;
@@ -23,9 +23,9 @@ export interface defaultStateType {
   canvasWidth: string | number;
   canvasPart: string;
   currentComponentId:
-    | keyof action.ComponentsMap
-    | (keyof action.ComponentsMap)[]
-    | null;
+  | keyof action.ComponentsMap
+  | (keyof action.ComponentsMap)[]
+  | null;
   componentsIds: (keyof action.ComponentsMap)[];
   components: action.ComponentsMap;
 }
@@ -45,16 +45,24 @@ const defaultState = {
 
 const selectComponentHandle: reducerFunc = (state, actions) => {
   const { componentId } = actions.payload;
+  const { currentComponentId } = state;
   const changeSelectStatus = (componentId: keyof action.ComponentsMap) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     state.components[componentId].isSelected = !state.components[componentId]
       .isSelected;
   };
-  if (Array.isArray(componentId)) {
-    componentId.map(item => changeSelectStatus);
-  } else {
-    changeSelectStatus(componentId);
+  const selectProcess = (componentId: (keyof action.ComponentsMap)[] | keyof action.ComponentsMap | null) => {
+    if (componentId === null) {
+      return;
+    }
+    if (Array.isArray(componentId)) {
+      componentId.map(item => changeSelectStatus(item));
+    } else {
+      // if ()
+      //   changeSelectStatus(componentId);
+    }
   }
+  selectProcess(componentId);
+  selectProcess(currentComponentId);
   return state;
 };
 

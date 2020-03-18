@@ -67,7 +67,6 @@ export class CanvasComp extends React.Component<Props> {
     const Lazy = lazy(() =>
       import(`@/components/comps_instance/${componentType}`),
     );
-
     return (
       <div
         ref={this.compStyle}
