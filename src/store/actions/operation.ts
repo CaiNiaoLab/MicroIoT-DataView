@@ -37,7 +37,7 @@ export const changeComponentBound = (
 export const selectComponent = (payload: string) => {
   return {
     type: SELECT_COMPONENT,
-    payload: payload,
+    payload: { componentId: payload },
   };
 };
 

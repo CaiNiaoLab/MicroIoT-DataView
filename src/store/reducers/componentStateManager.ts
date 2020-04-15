@@ -2,37 +2,9 @@
 
 import * as action from "../actions/actionType";
 import { produce } from "immer";
+import { defaultStateType, actionsType } from "@/store/reducers/types";
+import selectComponentHandle from "@/store/reducers/reducerHandles/selectComponent";
 
-interface actionPayloadType
-  extends action.ComponentsProperty,
-    action.ChangeComponentBoundType,
-    action.ComponentsOption,
-    action.ComponentsStyle,
-    action.AddNewComponent,
-    action.ComponentRect,
-    action.selectComponent {}
-
-interface actionsType {
-  type: string;
-  payload: actionPayloadType;
-}
-
-export interface defaultStateType {
-  canvasId: string;
-  canvasHeigh: string | number;
-  canvasWidth: string | number;
-  canvasPart: string;
-  currentComponentId:
-    | keyof action.ComponentsMap
-    | (keyof action.ComponentsMap)[]
-    | null;
-  componentsIds: (keyof action.ComponentsMap)[];
-  components: action.ComponentsMap;
-}
-
-interface reducerFunc {
-  (state: defaultStateType, actions: actionsType): defaultStateType;
-}
 const defaultState = {
   canvasId: "",
   canvasHeigh: "",
@@ -43,21 +15,21 @@ const defaultState = {
   components: {},
 };
 
-const selectComponentHandle: reducerFunc = (state, actions) => {
-  const { componentId } = actions.payload;
-  const changeSelectStatus = (componentId: keyof action.ComponentsMap) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    state.components[componentId].status.isSelected = !state.components[
-      componentId
-    ].status.isSelected;
-  };
-  if (Array.isArray(componentId)) {
-    componentId.map((item) => changeSelectStatus);
-  } else {
-    changeSelectStatus(componentId);
-  }
-  return state;
-};
+// const selectComponentHandle: reducerFunc = (state, actions) => {
+//   const { componentId } = actions.payload;
+//   const changeSelectStatus = (componentId: keyof action.ComponentsMap) => {
+//     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+//     state.components[componentId].status.isSelected = !state.components[
+//       componentId
+//     ].status.isSelected;
+//   };
+//   if (Array.isArray(componentId)) {
+//     componentId.map((item) => changeSelectStatus);
+//   } else {
+//     changeSelectStatus(componentId);
+//   }
+//   return state;
+// };
 
 export const componentStateManager = produce(
   (state: defaultStateType = defaultState, actions: actionsType) => {
@@ -82,7 +54,6 @@ export const componentStateManager = produce(
       }
       case action.UPDATE_COMPONENT_RECT: {
         const currentID = state.currentComponentId;
-        // const { rect } = state.components[currentID].property.option;
         let rect;
         if (typeof currentID === "string") {
           rect = state.components[currentID].property.option;
@@ -91,21 +62,10 @@ export const componentStateManager = produce(
             ...actions.payload,
           };
         }
-        // if(Array.isArray(currentID)){
-        //   currentID.map((key:keyof action.ComponentsMap)=>{
-
-        //   })
-        // }
-
         return state;
       }
       case action.SELECT_COMPONENT: {
         selectComponentHandle(state, actions);
-        // const { isLock, isSelected } = state.components[componentId];
-        // if (!isLock) {
-        //   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        //   state.components[componentId].isSelected = !isSelected;
-        // }
         break;
       }
       default:
