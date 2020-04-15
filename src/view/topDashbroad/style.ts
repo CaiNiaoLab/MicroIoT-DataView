@@ -1,6 +1,6 @@
 /** @format */
 import styled from "styled-components";
-import { BGC } from "@/components/gui/publicStyledValue";
+import { BGC } from "@/view/publicStyledValue";
 
 export const Container = styled.div`
   width: 100vw;

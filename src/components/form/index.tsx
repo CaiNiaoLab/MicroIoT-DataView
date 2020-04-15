@@ -2,13 +2,13 @@
 
 import React from "react";
 import { InputGroup, Button } from "@blueprintjs/core";
-import { Select, IItemRendererProps } from "@blueprintjs/select";
+import CustomizeSelect from "@/components/form/baseForm/customSelect";
 import {
   IInputGroupExampleState,
   InputType,
   RRFProps,
   multiRRFProps,
-} from "./formItemInterface";
+} from "./types/formItemInterface";
 import { Control } from "react-redux-form";
 import styled from "styled-components";
 // import { SketchPicker } from "react-color";
@@ -92,43 +92,36 @@ export const MutliInputNumber = (props: multiRRFProps) => {
   );
 };
 
-interface FormSelectRRFProps extends RRFProps {
-  items: any;
-  label: any;
+interface ISelectProps {
+  model: string; // 如：'.fontfamily'
+  fill?: boolean; // 是否宽度100%
+  children?: any; // options，如：<option value="Microsoft YaHei">微软雅黑</option>
+  native?: boolean; // 是否使用原生select
+  hasEmpty?: boolean; // 是否包含“无”选项
+  changeAction?: any; // 它指定<Control>在将更改分发给模型时组件应使用的动作
 }
 
-const CustomSelect = (props: any) => {
-  const { items, label, change } = props;
-  console.log(props);
+export const FormSelect = (props: ISelectProps) => {
+  const { hasEmpty, changeAction, ...newProps } = props;
+  // 只在为原生或者hasEmpty=true时才添加“无”选项
+  const needShowEmptyOption = hasEmpty;
 
-  const FilmSelect = Select.ofType<any>();
-  const selectItem = (item: any, itemProps: IItemRendererProps) => {
-    return (
-      <option key={itemProps.index} value={item.key}>
-        {item.value}
-      </option>
-    );
-  };
+  const emptyOption = [
+    <option key="_nothing_" value="">
+      无
+    </option>,
+  ];
 
-  return (
-    <FilmSelect itemRenderer={selectItem} onItemSelect={change} items={items}>
-      <Button>请选择{label}</Button>
-    </FilmSelect>
-  );
-};
-export const FormSelect = (props: FormSelectRRFProps) => {
-  const { model, items, label } = props;
   return (
     <Control
-      model={model}
-      mapProps={({ onChange, viewValue }) => ({
-        change: onChange,
-        items: items,
-        label: label,
-        value: viewValue,
-      })}
-      component={CustomSelect}
-    />
+      component={CustomizeSelect}
+      changeAction={changeAction}
+      {...newProps}
+    >
+      {needShowEmptyOption
+        ? emptyOption.concat(props.children)
+        : props.children}
+    </Control>
   );
 };
 
@@ -139,7 +132,7 @@ export const ColorPicker = (props: RRFProps) => {
       <Control
         model={model}
         mapProps={{
-          customChange: props => props.onChange,
+          customChange: (props) => props.onChange,
         }}
       />
     </>

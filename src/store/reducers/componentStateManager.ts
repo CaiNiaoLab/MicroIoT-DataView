@@ -47,11 +47,12 @@ const selectComponentHandle: reducerFunc = (state, actions) => {
   const { componentId } = actions.payload;
   const changeSelectStatus = (componentId: keyof action.ComponentsMap) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    state.components[componentId].isSelected = !state.components[componentId]
-      .isSelected;
+    state.components[componentId].status.isSelected = !state.components[
+      componentId
+    ].status.isSelected;
   };
   if (Array.isArray(componentId)) {
-    componentId.map(item => changeSelectStatus);
+    componentId.map((item) => changeSelectStatus);
   } else {
     changeSelectStatus(componentId);
   }
@@ -65,7 +66,7 @@ export const componentStateManager = produce(
         const { currentComponentId: componentId, component } = actions.payload;
         const { currentComponentId } = state;
         if (typeof currentComponentId === "string") {
-          state.components[currentComponentId].isSelected = false;
+          state.components[currentComponentId].status.isSelected = false;
         }
         state.componentsIds.push(componentId);
         state.currentComponentId = componentId;

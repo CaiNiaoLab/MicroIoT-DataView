@@ -2,7 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import { FormSelect } from "@/publicComponents/form";
+import { FormSelect } from "@/components/form";
 import { formComponentConfigPath } from "@/utils/globalVars";
 
 const Container = styled.div`
@@ -17,16 +17,14 @@ export default class Dataset extends React.Component<any> {
     return (
       <Container>
         data
-        {/* <FormSelect
-          items={[
-            {
-              key: "test",
-              value: "test1",
-            },
-          ]}
-          model={formComponentConfigPath + componentId + ".dataset.datasetId"}
-          label=""
-        ></FormSelect> */}
+        <FormSelect
+          model={
+            formComponentConfigPath + "." + componentId + ".dataset.datasetId"
+          }
+        >
+          <option value="test">test</option>
+          <option value="test1">test</option>
+        </FormSelect>
       </Container>
     );
   }

@@ -2,8 +2,8 @@
 
 import React from "react";
 import Draggable from "react-draggable";
-import { InputText } from "@/publicComponents/form";
-import { Container, ListItemContainer } from "@/components/gui/MenuList/style";
+import { InputText } from "@/components/form";
+import { Container, ListItemContainer } from "@/view/MenuList/style";
 import { connect } from "react-redux";
 import { stateType } from "@/store/actions/actionType";
 import { store } from "@/store";
@@ -51,7 +51,7 @@ class ComponentsList extends React.Component<ListProps> {
               <ListItem
                 componentId={item}
                 componentTitle={components[item].componentTitle}
-                isSelect={components[item].isSelected}
+                isSelect={components[item].status.isSelected}
                 key={index}
               />
             ))}

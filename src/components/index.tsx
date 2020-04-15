@@ -1,12 +1,12 @@
 /** @format */
 
 import React from "react";
-import Top from "@/components/gui/topDashbroad";
-import Center from "@/components/gui/center";
-import RightSide from "@/components/gui/rightside";
+import Top from "@/view/topDashbroad";
+import Center from "@/view/center";
+import RightSide from "@/view/rightside";
 import { connect } from "react-redux";
 import { stateType } from "@/store/actions/actionType";
-import LeftSide from "@/components/gui/MenuList";
+import LeftSide from "@/view/MenuList";
 import styled from "styled-components";
 // import { store } from "@/store";
 // import { stateType } from "@/store/actions/actionType";

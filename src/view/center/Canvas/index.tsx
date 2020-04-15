@@ -2,10 +2,10 @@
 
 import React from "react";
 import { connect } from "react-redux";
-import { Container } from "@/components/gui/center/Canvas/style";
+import { Container } from "@/view/center/Canvas/style";
 import { stateType, ComponentsMap } from "@/store/actions/actionType";
-import Dragger from "@/publicComponents/Dragger";
-import CanvasComp from "@/components/gui/center/Canvas/canvasComp";
+import Dragger from "@/components/Dragger";
+import CanvasComp from "@/view/center/Canvas/canvasComp";
 
 interface Props {
   CanvasStyles?: React.CSSProperties;

@@ -1,8 +1,8 @@
 /** @format */
 
 import React from "react";
-import { Container } from "@/components/gui/center/style";
-import Canvas from "@/components/gui/center/Canvas";
+import { Container } from "@/view/center/style";
+import Canvas from "@/view/center/Canvas";
 import { store } from "@/store";
 
 interface Props {}

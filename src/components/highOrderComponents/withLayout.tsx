@@ -7,11 +7,11 @@ import {
   Components,
   stateType,
   mapTypesToUnecessary,
-} from "../store/actions/actionType";
+} from "../../store/actions/actionType";
 import {
   changeComponentBound,
   addNewComponent,
-} from "../store/actions/operation";
+} from "../../store/actions/operation";
 
 interface Props {
   canvasPart: string;
@@ -29,7 +29,7 @@ const mapDispatchToProps = {
   changeComponentBound,
   addNewComponent,
 };
-export default function(Wapper: any) {
+export default function (Wapper: any) {
   class HOC extends React.Component<mapTypesToUnecessary<Props>> {
     render() {
       return <Wapper {...this.props} />;

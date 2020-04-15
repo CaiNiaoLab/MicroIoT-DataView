@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { FormItemProps } from "./formItemInterface";
+import { FormItemProps } from "../types/formItemInterface";
 import styled from "styled-components";
 
 const Container = styled.div`

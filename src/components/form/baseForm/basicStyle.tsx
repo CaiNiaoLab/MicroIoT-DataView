@@ -4,7 +4,7 @@ import React from "react";
 import { formRootPath, formComponentConfigPath } from "@/utils/globalVars";
 import { ComponentsMapKeysType } from "@/store/actions/actionType";
 import { Fieldset } from "react-redux-form";
-import FormItem from "@/publicComponents/form/FormItem";
+import FormItem from "@/components/form/baseForm/FormItem";
 
 interface Props {
   currentID: ComponentsMapKeysType | ComponentsMapKeysType[];

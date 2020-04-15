@@ -12,10 +12,10 @@ import {
   updateComponentStyle,
   addNewComponent,
 } from "@/store/actions/operation";
-import { Container } from "@/components/gui/topDashbroad/style";
+import { Container } from "@/view/topDashbroad/style";
 import { connect } from "react-redux";
-import { MutliInputNumber, InputText } from "@/publicComponents/form";
-import FormItem from "@/publicComponents/form/FormItem";
+import { MutliInputNumber, InputText } from "@/components/form";
+import FormItem from "@/components/form/baseForm/FormItem";
 import { Fieldset } from "react-redux-form";
 import { ButtonGroup, Button } from "@blueprintjs/core";
 import uuid from "uuid";
@@ -37,9 +37,11 @@ class TopDashBroad extends React.Component<ExpandProps> {
       componentTitle: "",
       componentName: "",
       componentType: "echarts",
-      isSelected: true,
-      isLock: false,
-      isHide: false,
+      status: {
+        isSelected: true,
+        isLock: false,
+        isHide: false,
+      },
       prevComponents: null,
       nextComponents: null,
       property: (await import("@/components/comps_instance/echarts/config"))

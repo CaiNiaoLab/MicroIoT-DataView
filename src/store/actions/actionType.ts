@@ -48,13 +48,17 @@ export interface ComponentsDataset {
   };
 }
 
+export interface ComponentStatus {
+  isSelected: boolean;
+  isLock: boolean;
+  isHide: boolean;
+}
+
 export interface Components {
   componentTitle: string;
   componentName: string;
   componentType: string;
-  isSelected: boolean;
-  isLock: boolean;
-  isHide: boolean;
+  status: ComponentStatus;
   property: ComponentsProperty;
   dataset?: ComponentsDataset;
   prevComponents: Components | null;
